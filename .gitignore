@@ -1,0 +1,19 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+user_wav.wav
+
+# Virtual environments
+.env
+.venv
+.vscode
+logs/
+tts/tts_venv
+tts/dataset
+tts/Output
+rasa_nlu/rasa_venv
+.rasa

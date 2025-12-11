@@ -1,0 +1,608 @@
+version: "3.1"
+
+nlu:
+
+# ======================================================
+# GREET (50 EXAMPLES)
+# ======================================================
+- intent: greet
+  examples: |
+    - hi
+    - hey
+    - hello
+    - good morning
+    - good afternoon
+    - good evening
+    - yo
+    - hey there
+    - hi sylva
+    - hello assistant
+    - what's up
+    - morning
+    - evening
+    - greetings
+    - hi there friend
+    - hey sylva
+    - hello there
+    - sup
+    - yo sylva
+    - hi buddy
+    - hey friend
+    - hey mate
+    - hello my assistant
+    - good day
+    - howdy
+    - hi there sylva
+    - hey bot
+    - hi system
+    - hi assistant
+    - hi again
+    - hey I'm here
+    - hello I'm back
+    - good to see you
+    - hi what’s up
+    - hey how are you
+    - hello and good day
+    - morning sylva
+    - evening assistant
+    - hi there system
+    - hey man
+    - hello hello
+    - yo assistant
+    - hey wake up
+    - hi just checking
+    - hello my friend
+    - hey I'm talking to you
+    - hi let's start
+    - good morning sylva
+    - greeting system
+
+# ======================================================
+# OPEN APP (50 EXAMPLES)
+# ======================================================
+- intent: open_app
+  examples: |
+    - open [chrome](app_name)
+    - launch [spotify](app_name)
+    - start [vscode](app_name)
+    - run [steam](app_name)
+    - open [notepad](app_name)
+    - open my [discord](app_name)
+    - launch [telegram](app_name)
+    - fire up [photoshop](app_name)
+    - open [calculator](app_name)
+    - run [github desktop](app_name)
+    - open [explorer](app_name)
+    - start [camera](app_name)
+    - open [settings](app_name)
+    - start [obs](app_name)
+    - open [whatsapp](app_name)
+    - launch [edge](app_name)
+    - open [terminal](app_name)
+    - open [store](app_name)
+    - open [calendar](app_name)
+    - run [notes](app_name)
+    - open [valorant](app_name)
+    - launch [league of legends](app_name)
+    - start [minecraft](app_name)
+    - run [unity](app_name)
+    - run [unreal engine](app_name)
+    - open [figma](app_name)
+    - open [notion](app_name)
+    - launch [vlc](app_name)
+    - run [gimp](app_name)
+    - start [krita](app_name)
+    - open [telegram desktop](app_name)
+    - start my [email](app_name)
+    - open [videos](app_name)
+    - open [music](app_name)
+    - launch [onedrive](app_name)
+    - start [outlook](app_name)
+    - run [camtasia](app_name)
+    - launch [blender](app_name)
+    - start [android studio](app_name)
+    - open [powershell](app_name)
+    - open [cmd](app_name)
+    - launch [battle.net](app_name)
+    - open [epic games](app_name)
+    - start [camera](app_name)
+    - open [gallery](app_name)
+    - run [photos](app_name)
+    - open [word](app_name)
+    - open [excel](app_name)
+    - launch [powerpoint](app_name)
+    - fire up [premiere](app_name)
+    - open [after effects](app_name)
+
+# ======================================================
+# NOTE CREATE (50 EXAMPLES)
+# ======================================================
+- intent: note_create
+  examples: |
+    - write this down [the only thing I care about is winning](note_text)
+    - note this [I need to focus on backend projects next month](note_text)
+    - take a note [buy milk later after gym](note_text)
+    - write down [send portfolio update before 7pm](note_text)
+    - jot down [clean my downloads folder soon](note_text)
+    - save this [practice fastapi tomorrow morning](note_text)
+    - remember this [drink more water today](note_text)
+    - write a note [meeting moved to friday 3pm](note_text)
+    - note [fix whisper stt hallucination issue](note_text)
+    - store this [update sylva greeting logic](note_text)
+    - make a note saying [prepare slides tonight](note_text)
+    - write [charge headset before gaming tonight](note_text)
+    - note this sentence [do not forget to push github commits](note_text)
+    - take note [doctor appointment next monday](note_text)
+    - record this [I should learn regex soon](note_text)
+    - write this down [create json loader for app launcher](note_text)
+    - note [backup laptop this weekend](note_text)
+    - jot down [rewrite shutdown confirmation flow](note_text)
+    - save a note [organize python scripts folder](note_text)
+    - take a note [workout: push-ups, sit-ups, crunches](note_text)
+    - note this [practice english pronunciation](note_text)
+    - write a reminder [clean my desk later tonight](note_text)
+    - note [prepare breakfast early tomorrow](note_text)
+    - jot this [fix decision logic timing bug](note_text)
+    - write down [optimize whisper timeout settings](note_text)
+    - save this note [plan weekend gaming session](note_text)
+    - write [add fastapi routing example](note_text)
+    - note [train new rasa model next week](note_text)
+    - take note [study kaldi vs whisper comparison](note_text)
+    - note this [improve wake word accuracy](note_text)
+    - jot down [buy new microphone soon](note_text)
+    - store this note [clean unnecessary modules](note_text)
+    - write this [prepare cloudflare config](note_text)
+    - take a note [new idea: voice-controlled file manager](note_text)
+    - record [practice mandarin phrases](note_text)
+    - write down [I should sleep earlier today](note_text)
+    - save note [fix missing intents in rasa](note_text)
+    - note [retrain deny intent data](note_text)
+    - write this [optimize tts subprocess calls](note_text)
+    - jot [experiment with vosk later](note_text)
+    - note [add more test commands for sylva](note_text)
+    - take note [organize sylva modules folder](note_text)
+    - write [check battery health tomorrow](note_text)
+    - save this [download vscode extensions](note_text)
+    - record this [update python libraries](note_text)
+    - write down [fix entity extraction for note text](note_text)
+    - note [remember to call mom tonight](note_text)
+    - jot [plan meals for the week](note_text)
+    - save note [prepare music playlist](note_text)
+
+# ======================================================
+# SEARCH WEB (50 EXAMPLES)
+# ======================================================
+- intent: search_web
+  examples: |
+    - search for [python tutorials for beginners](search_query)
+    - google [best laptop 2025 under $1000](search_query)
+    - look up [weather in jakarta](search_query)
+    - search [best games releasing in 2025](search_query)
+    - find [meaning of resilience](search_query)
+    - google this [why is my wifi slow today](search_query)
+    - search [how many decades are in a century](search_query)
+    - look up [history of mandarin language](search_query)
+    - search [why cats sleep so much](search_query)
+    - find [top anime this season](search_query)
+    - google [fastapi tutorial](search_query)
+    - search [best programming headphones](search_query)
+    - search for [python dictionary comprehension examples](search_query)
+    - check [bitcoin price right now](search_query)
+    - google [why my laptop overheats](search_query)
+    - search [healthy meal prep ideas](search_query)
+    - find [how to stop procrastinating](search_query)
+    - look up [most powerful anime characters 2025](search_query)
+    - google [difference between ssd and hdd](search_query)
+    - search [gaming laptops under 15 million](search_query)
+    - search [how to clean mechanical keyboard](search_query)
+    - look up [simple workout routine](search_query)
+    - google [how loud is 60 decibels](search_query)
+    - search [best microphones for streaming](search_query)
+    - find [should I upgrade my GPU](search_query)
+    - search for [interesting space facts](search_query)
+    - google [rasa nlu entity extraction guide](search_query)
+    - search [top movies 2024](search_query)
+    - find [cheap flights to japan](search_query)
+    - look for [latest AI breakthroughs](search_query)
+    - google [how to write a cv](search_query)
+    - search [easy breakfast ideas](search_query)
+    - find [does coffee help focus](search_query)
+    - google [simple flask API example](search_query)
+    - search for [funny programming memes](search_query)
+    - search [how does whisper stt work](search_query)
+    - google [beginner gym routine](search_query)
+    - find [best productivity apps](search_query)
+    - search [why is my mic quiet](search_query)
+    - look up [how to improve english speaking](search_query)
+    - search [difference between ai and machine learning](search_query)
+    - google [what is docker](search_query)
+    - search for [python list comprehension tricks](search_query)
+    - look up [how to increase wifi range](search_query)
+    - google [top movies based on true stories](search_query)
+    - search [how long to boil an egg soft](search_query)
+    - find [what bitcoin actually is](search_query)
+    - google [why my phone keeps restarting](search_query)
+    - search [best budget monitors for coding](search_query)
+
+# ======================================================
+# GET TIME (50 EXAMPLES)
+# ======================================================
+- intent: get_time
+  examples: |
+    - what time is it
+    - tell me the time
+    - current time please
+    - check the time
+    - what's the time right now
+    - time now
+    - give me the time
+    - can you tell time
+    - show me the time
+    - do you know the time
+    - tell time
+    - time please
+    - what’s current time
+    - give current time
+    - what time now
+    - read the time
+    - show current time
+    - what is the time
+    - time check
+    - tell me what time it is
+    - what’s the system time
+    - tell me the exact time
+    - what hour is it
+    - can you read the clock
+    - tell me time now
+    - what's the real time
+    - give me system time
+    - check the clock
+    - show the current hour
+    - let me know the time
+    - update me with the time
+    - tell the time for me
+    - time?
+    - what's the time sylva
+    - time please assistant
+    - tell me time assistant
+    - look at the clock
+    - what hour is it now
+    - give me local time
+    - tell me clock time
+    - system time now please
+    - what time does it show
+    - report the time
+    - time reading please
+    - tell the time now
+    - read me the time
+    - time status
+    - time information
+    - what's my current time
+
+# ======================================================
+# GET DATE (50 EXAMPLES)
+# ======================================================
+- intent: get_date
+  examples: |
+    - what’s the date today
+    - tell me today’s date
+    - current date please
+    - what's today’s date
+    - show me the date
+    - date today
+    - tell date
+    - what's the date
+    - check the date
+    - do you know today’s date
+    - give me the date
+    - show today’s date
+    - current date now
+    - what date is it
+    - date check
+    - what day is it
+    - today’s date please
+    - what's the calendar date
+    - can you tell the date
+    - date now
+    - give me calendar date
+    - what's the system date
+    - tell me the full date
+    - report today's date
+    - tell me current date
+    - update me with today’s date
+    - what does the calendar say
+    - tell date for me
+    - date status
+    - give me today's full date
+    - what is today's number
+    - show me calendar info
+    - read out today's date
+    - what's the date sylva
+    - today's date please assistant
+    - tell me the date assistant
+    - check calendar
+    - what day and month is it
+    - date reading please
+    - what date do we have
+    - display the date
+    - give me date information
+    - tell me day and date
+    - show today date now
+    - current day info
+    - what day is today
+    - tell me the system date
+    - show system date
+    - calendar check
+
+# ======================================================
+# HELP COMMANDS (50 EXAMPLES)
+# ======================================================
+- intent: help_commands
+  examples: |
+    - what can you do
+    - show me your commands
+    - list all commands
+    - help me
+    - help
+    - show command list
+    - what are your abilities
+    - what functions do you have
+    - show me available actions
+    - display commands
+    - what can I ask you
+    - guide me
+    - command help
+    - list your features
+    - what are your features
+    - show available commands
+    - I need help
+    - help commands please
+    - show all features
+    - explain your abilities
+    - what are you capable of
+    - what tasks can you perform
+    - what can sylva do
+    - what can you help me with
+    - show all options
+    - show me everything you can do
+    - list all features
+    - help assistant
+    - how do I use you
+    - how does this system work
+    - what commands exist
+    - help menu please
+    - give me help
+    - show command options
+    - what are your skills
+    - list actions available
+    - what services do you provide
+    - command reference
+    - show me help info
+    - I need assistance
+    - explain your functions
+    - help screen please
+    - show full command list
+    - provide command list
+    - list all interactions
+    - what operations can you do
+    - help with commands
+    - show complete list of commands
+    - tell me what you can do
+
+# ======================================================
+# SHUTDOWN SYSTEM (50 EXAMPLES)
+# ======================================================
+- intent: shutdown_system
+  examples: |
+    - shut down my pc
+    - shut down the system
+    - turn off the computer
+    - power off
+    - shutdown now
+    - shut everything down
+    - turn off everything
+    - shut the machine down
+    - power off device
+    - shut down completely
+    - execute shutdown
+    - please shut down the pc
+    - kill power
+    - shutdown computer
+    - turn off my laptop
+    - shut down windows
+    - system shutdown
+    - please power off
+    - shut down system now
+    - shut down the whole device
+    - power down
+    - turn system off
+    - initiate shutdown
+    - I want to shut down
+    - shut down please
+    - disable system
+    - begin shutdown
+    - execute power off
+    - shut down immediately
+    - shut down and exit
+    - turn off the entire computer
+    - shut down everything right now
+    - shut the system off
+    - deactivate the machine
+    - order shutdown
+    - system power off
+    - turn off all operations
+    - complete shutdown sequence
+    - shutdown mode
+    - perform shutdown
+    - shut down all programs
+    - end system
+    - finish and shut down
+    - turn off automatically
+    - halt system
+    - stop system entirely
+    - stop and shut down
+    - shut it all down
+
+# ======================================================
+# REMIND ME (50 EXAMPLES)
+# ======================================================
+- intent: remind_me
+  examples: |
+    - remind me to [drink water](reminder_text) in [10 minutes](time_value)
+    - remind me [call dad](reminder_text) in [1 hour](time_value)
+    - remind me to [cook rice](reminder_text) in [20 minutes](time_value)
+    - remind me [study python](reminder_text) tonight at [9](time_value)
+    - remind me [take medicine](reminder_text) at [9pm](time_value)
+    - remind me in [5 minutes](time_value) to [check the stove](reminder_text)
+    - set a reminder to [wash dishes](reminder_text) in [15 minutes](time_value)
+    - remind me to [sleep early](reminder_text) at [10pm](time_value)
+    - remind me [prepare slides](reminder_text) tomorrow at [2pm](time_value)
+    - remind me to [clean my room](reminder_text) in [25 minutes](time_value)
+    - remind me [drink coffee](reminder_text) in [3 hours](time_value)
+    - remind me [update github](reminder_text) after [1 hour](time_value)
+    - remind me [practice english](reminder_text) at [9pm](time_value)
+    - remind me to [water the plants](reminder_text) tomorrow at [8am](time_value)
+    - remind me [organize files](reminder_text) in [20 minutes](time_value)
+    - remind me [buy groceries](reminder_text) this evening at [6](time_value)
+    - remind me [send email](reminder_text) at [4pm](time_value)
+    - remind me to [charge phone](reminder_text) at [11pm](time_value)
+    - remind me to [reply messages](reminder_text) after [30 minutes](time_value)
+    - remind me [workout](reminder_text) at [7pm](time_value)
+    - remind me [review notes](reminder_text) in [45 minutes](time_value)
+    - remind me to [hydrate](reminder_text) every [30 minutes](time_value)
+    - remind me [finish homework](reminder_text) at [11am](time_value)
+    - remind me [learn fastapi](reminder_text) tomorrow morning at [7](time_value)
+    - remind me in [10 minutes](time_value) to [rest my eyes](reminder_text)
+    - remind me [book haircut](reminder_text) at [3pm](time_value)
+    - remind me to [feed the cat](reminder_text) in [1 hour](time_value)
+    - remind me [prepare lunch](reminder_text) in [40 minutes](time_value)
+    - remind me [check email](reminder_text) in [20 minutes](time_value)
+    - remind me [finish assignment](reminder_text) at [11am](time_value)
+    - remind me [update project status](reminder_text) in [1 hour](time_value)
+    - remind me [take vitamin](reminder_text) at [8am](time_value)
+    - remind me [download files](reminder_text) in [10 minutes](time_value)
+    - remind me [buy food](reminder_text) at [12pm](time_value)
+    - remind me [call my sister](reminder_text) this afternoon at [3](time_value)
+    - remind me [check windows updates](reminder_text) in [15 minutes](time_value)
+    - remind me [practice mandarin](reminder_text) at [9pm](time_value)
+    - remind me to [clean desk](reminder_text) after [1 hour](time_value)
+    - remind me to [review code](reminder_text) tonight at [10](time_value)
+    - remind me [prepare coffee](reminder_text) in [5 minutes](time_value)
+    - remind me [start cooking](reminder_text) in [25 minutes](time_value)
+    - remind me [shower](reminder_text) in [30 minutes](time_value)
+    - remind me [check my phone](reminder_text) at [2pm](time_value)
+    - remind me [turn off AC](reminder_text) at [midnight](time_value)
+    - remind me [call friend](reminder_text) after [20 minutes](time_value)
+    - remind me [do laundry](reminder_text) tomorrow at [8am](time_value)
+    - remind me [water flowers](reminder_text) at [6pm](time_value)
+    - remind me [prepare notes](reminder_text) in [30 minutes](time_value)
+
+# ======================================================
+# AFFIRM (50 EXAMPLES)
+# ======================================================
+- intent: affirm
+  examples: |
+    - yes
+    - yeah
+    - yup
+    - correct
+    - that’s right
+    - sure
+    - absolutely
+    - of course
+    - definitely
+    - yes please
+    - sounds good
+    - confirmed
+    - okay
+    - ok yes
+    - yes do that
+    - yea sure
+    - that works
+    - proceed
+    - go ahead
+    - yes continue
+    - yes correct
+    - sure thing
+    - yes that is right
+    - okay continue
+    - yes please do
+    - yes sylva
+    - that’s okay
+    - yes go on
+    - sure continue
+    - yep
+    - yeah go for it
+    - yes that’s fine
+    - alright
+    - yes I agree
+    - yes approved
+    - sure approved
+    - okay go ahead
+    - sounds perfect
+    - that's fine
+    - do it
+    - confirm that
+    - yes I want that
+    - yes proceed
+    - correct proceed
+    - yes move on
+    - sure why not
+    - yes I accept
+    - yes exactly
+    - okay that's correct
+
+# ======================================================
+# DENY (50 EXAMPLES)
+# ======================================================
+- intent: deny
+  examples: |
+    - no
+    - nope
+    - nah
+    - no thanks
+    - don't do that
+    - please stop
+    - stop
+    - cancel
+    - no need
+    - nevermind
+    - skip that
+    - absolutely not
+    - not correct
+    - that’s wrong
+    - I disagree
+    - not really
+    - no please don’t
+    - no don't
+    - not this one
+    - wrong
+    - no cancel that
+    - no you’re wrong
+    - nah don't do it
+    - no cancel the action
+    - no reject that
+    - no abort
+    - abort mission
+    - do not continue
+    - stop right there
+    - stop the process
+    - I don't want that
+    - that’s not what I meant
+    - cancel the operation
+    - no cancel now
+    - stop now
+    - don't continue
+    - no not that
+    - I said no
+    - negative
+    - not happening
+    - no turn it off
+    - no cancel please
+    - this is wrong
+    - no stop this
+    - reject
+    - deny that
+    - decline
+    - do not proceed
+    - please cancel this
