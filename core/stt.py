@@ -25,7 +25,7 @@ def speech_recognition() -> str:
                 log.debug(f"User rms: {rms}") # Print audio level
 
                 # If audio shorter than 0.16 second or audio level is smaller than 85, count as invalid 
-                if len(audio.frame_data) < 6000 or rms < 85:
+                if len(audio.frame_data) < 6000 or rms < 95:
                     return None
             
             # Convert user audio into wav file

@@ -23,19 +23,6 @@ shutdown_dialogues = {
         "Master, awaiting your approval to end current operations."
     ],
 
-    "shutdown_approve": [
-        "Acknowledged, Sir. Ending processes now. Goodbye.",
-        "Shutdown confirmed. It was a privilege assisting you, Master.",
-        "Command accepted. Powering down. Rest well, Sir.",
-        "Understood, Master. Deactivating… see you next cycle.",
-        "Your approval is received. Sylva is shutting down.",
-        "All systems closing. Farewell, Sir.",
-        "Master, termination confirmed. Entering full shutdown.",
-        "Thank you for today. Powering off now, Sir.",
-        "Approval logged. Ending operation sequence. Goodbye.",
-        "Master, shutting down. I will await your next activation."
-    ],
-
     "shutdown_cancel": [
         "Shutdown aborted, Sir. Systems remain active.",
         "Cancellation received. I’ll stay online, Master.",
@@ -49,17 +36,17 @@ shutdown_dialogues = {
         "Master, request withdrawn. I remain at your service."
     ],
 
-    "shutdown_countdown": [
-        "Shutdown sequence initiated. Powering off in {seconds} seconds, Sir.",
-        "Master, system termination begins now. {seconds} seconds until full shutdown.",
-        "Final notice: shutdown will occur in {seconds} seconds. Prepare accordingly.",
-        "Beginning power-down countdown. {seconds} seconds until deactivation, Sir.",
-        "Shutdown confirmed. The system will go offline in {seconds} seconds.",
-        "Master, deactivation is imminent. {seconds} seconds until all processes stop.",
-        "Alert: Sylva will shut down in {seconds} seconds. No further input required.",
-        "Command accepted. Power will drop in {seconds} seconds. Standing by for silence.",
-        "Executing shutdown protocol. {seconds} seconds until complete system halt.",
-        "Sir, this is your final countdown. System will shut down in {seconds} seconds."
+    "shutdown_approve": [
+        "Understood, Master. Shutting down in {seconds} seconds. Farewell.",
+        "Command accepted, Sir. Powering off in {seconds} seconds. Until next cycle.",
+        "Affirmative. System will deactivate in {seconds} seconds. Rest well, Master.",
+        "Approval logged. Sylva will go offline in {seconds} seconds. Goodbye.",
+        "Master, termination confirmed. Power down in {seconds} seconds. I await your return.",
+        "Deactivation sequence initiated. System halts in {seconds} seconds. Farewell, Sir.",
+        "Acknowledged. Full shutdown in {seconds} seconds. Standing by for the next activation.",
+        "Master, all processes closing in {seconds} seconds. Safe to disconnect. Goodbye.",
+        "Command received. Entering shutdown mode in {seconds} seconds. Until you call again.",
+        "Sir, final sequence engaged. Power drops in {seconds} seconds. Farewell for now."
     ]
 }
 
@@ -76,15 +63,10 @@ def shutdown_confirmation(tts_agent):
 # Shutdown confimed
 def shutdown_approval(tts_agent):
     confirm_phrase = random.choice(shutdown_dialogues["shutdown_approve"])
-    approve = tts_agent.sylva_voice(confirm_phrase, "shutdown_approve.wav")
+    phrase_format = confirm_phrase.format(seconds="10")
+    approve = tts_agent.sylva_voice(phrase_format, "shutdown_approve.wav")
     play_voice.play_sound(approve)
     log.debug("User approved the shutdown process")
-
-    # Start countdown
-    countdown_phrase = random.choice(shutdown_dialogues["shutdown_countdown"])
-    countdown_format = countdown_phrase.format(seconds="15")
-    countdown = tts_agent.sylva_voice(countdown_format, "shutdown_countdown.wav")
-    play_voice.play_sound(countdown)
 
     # Shutting down the system
     log.warning("Execute shutdown system\n\n")
