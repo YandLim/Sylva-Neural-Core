@@ -1,5 +1,5 @@
 # Importing modules
-from modules import greetings, get_time, get_date, shutdown, web_search
+from modules import greetings, get_time, get_date, shutdown, web_search, create_note
 from utils import logger
 from core import intent_processor
 import asyncio
@@ -48,4 +48,9 @@ def decision_making(tts_agent, nlu_agent, user_command, shutdown_pending):
     elif intent == "search_web":
         log.info(f"Searching web for: {value}")
         web_search.search_result(value, tts_agent)
+        return
+    
+    elif intent == "note_create":
+        log.info("Sylva writing down...")
+        create_note.create_note(tts_agent, value)
         return

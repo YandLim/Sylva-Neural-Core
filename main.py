@@ -1,9 +1,10 @@
 # Importing modules and libraries
-from modules import greetings
+from utils import logger, tts_generator, play_voice
 from core import stt, sylva_decision
 from rasa.core.agent import Agent
-from utils import logger, tts_generator
+from modules import greetings
 from core import config
+import random
 import time
 
 # Define logger
@@ -19,8 +20,16 @@ shutdown_pending = False
 last_wake_time = 0
 run_time = 0
 
-# wake up Keyword
+# wake up Keyword and goodbye templates
 wake_word = ["sylva", "silva", "silver", "wake up", "wakey wakey", "sofa"]
+goodbye_templates = [
+    "Goodbye, Master. Standing by.",
+    "Farewell, Sir. Until next activation.",
+    "Session ending. Goodbye.",
+    "Acknowledged. See you next time, Master.",
+    "Going offline. Goodbye."
+]
+
 
 # Main functionality
 if __name__ == "__main__":
@@ -81,6 +90,9 @@ if __name__ == "__main__":
 
             if any(b_word in user_command.lower() for b_word in ["break", "brick", "brief"]):
                 log.info("Shutdown Sylva system\n\n")
+                farewell_phrase = random.choice(goodbye_templates)
+                break_voice_path = tts.sylva_voice(farewell_phrase, "farewell.wav")
+                play_voice.play_sound(break_voice_path)
                 break
 
             # Update last wake time and do commands

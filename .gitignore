@@ -17,3 +17,4 @@ tts/dataset
 tts/Output
 rasa_nlu/rasa_venv
 .rasa
+user_note/

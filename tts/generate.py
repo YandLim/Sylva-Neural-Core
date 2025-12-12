@@ -36,6 +36,7 @@ while True:
                 top_k=40, 
                 top_p=0.75, 
                 enable_text_splitting=True, 
+                speed=0.8
             )
             
         else:

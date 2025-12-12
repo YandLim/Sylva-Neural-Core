@@ -123,9 +123,7 @@ nlu:
     - note this [I need to focus on backend projects next month](note_text)
     - take a note [buy milk later after gym](note_text)
     - write down [send portfolio update before 7pm](note_text)
-    - jot down [clean my downloads folder soon](note_text)
     - save this [practice fastapi tomorrow morning](note_text)
-    - remember this [drink more water today](note_text)
     - write a note [meeting moved to friday 3pm](note_text)
     - note [fix whisper stt hallucination issue](note_text)
     - store this [update sylva greeting logic](note_text)
@@ -136,13 +134,11 @@ nlu:
     - record this [I should learn regex soon](note_text)
     - write this down [create json loader for app launcher](note_text)
     - note [backup laptop this weekend](note_text)
-    - jot down [rewrite shutdown confirmation flow](note_text)
     - save a note [organize python scripts folder](note_text)
     - take a note [workout: push-ups, sit-ups, crunches](note_text)
     - note this [practice english pronunciation](note_text)
     - write a reminder [clean my desk later tonight](note_text)
     - note [prepare breakfast early tomorrow](note_text)
-    - jot this [fix decision logic timing bug](note_text)
     - write down [optimize whisper timeout settings](note_text)
     - save this note [plan weekend gaming session](note_text)
     - write [add fastapi routing example](note_text)
@@ -168,6 +164,29 @@ nlu:
     - note [remember to call mom tonight](note_text)
     - jot [plan meals for the week](note_text)
     - save note [prepare music playlist](note_text)
+    - intent: note_create
+  examples: |
+    - write this down [there will be a party at 5](note_text)
+    - note [meeting starts at 3 not 4](note_text)
+    - save this [version 2 needs refactor](note_text)
+    - write down [budget is 1500000 this month](note_text)
+    - note [call lasted 45 minutes](note_text)
+    - jot down [gym session was 60 minutes today](note_text)
+    - write a note [room number is 504](note_text)
+    - note this [pin code is 9283](note_text)
+    - save [project deadline moved to day 12](note_text)
+    - write down [test failed at step 7](note_text)
+    - note [battery dropped to 18 percent](note_text)
+    - write this [commit count is 23](note_text)
+    - store this [meeting at 5 was cancelled](note_text)
+    - note [score was 3 to 1](note_text)
+    - jot [log shows error at line 42](note_text)
+    - write down [temperature reached 32 degrees](note_text)
+    - note [woke up at 6 today](note_text)
+    - save this [build finished in 9 minutes](note_text)
+    - write [room 7 needs cleaning](note_text)
+    - note [class starts at 10 but no reminder needed](note_text)
+
 
 # ======================================================
 # SEARCH WEB (50 EXAMPLES)
@@ -335,61 +354,6 @@ nlu:
     - calendar check
 
 # ======================================================
-# HELP COMMANDS (50 EXAMPLES)
-# ======================================================
-- intent: help_commands
-  examples: |
-    - what can you do
-    - show me your commands
-    - list all commands
-    - help me
-    - help
-    - show command list
-    - what are your abilities
-    - what functions do you have
-    - show me available actions
-    - display commands
-    - what can I ask you
-    - guide me
-    - command help
-    - list your features
-    - what are your features
-    - show available commands
-    - I need help
-    - help commands please
-    - show all features
-    - explain your abilities
-    - what are you capable of
-    - what tasks can you perform
-    - what can sylva do
-    - what can you help me with
-    - show all options
-    - show me everything you can do
-    - list all features
-    - help assistant
-    - how do I use you
-    - how does this system work
-    - what commands exist
-    - help menu please
-    - give me help
-    - show command options
-    - what are your skills
-    - list actions available
-    - what services do you provide
-    - command reference
-    - show me help info
-    - I need assistance
-    - explain your functions
-    - help screen please
-    - show full command list
-    - provide command list
-    - list all interactions
-    - what operations can you do
-    - help with commands
-    - show complete list of commands
-    - tell me what you can do
-
-# ======================================================
 # SHUTDOWN SYSTEM (50 EXAMPLES)
 # ======================================================
 - intent: shutdown_system
@@ -491,10 +455,16 @@ nlu:
     - remind me [start cooking](reminder_text) in [25 minutes](time_value)
     - remind me [shower](reminder_text) in [30 minutes](time_value)
     - remind me [check my phone](reminder_text) at [2pm](time_value)
-    - remind me [turn off AC](reminder_text) at [midnight](time_value)
-    - remind me [call friend](reminder_text) after [20 minutes](time_value)
-    - remind me [do laundry](reminder_text) tomorrow at [8am](time_value)
-    - remind me [water flowers](reminder_text) at [6pm](time_value)
+    - remind me to [drink water](reminder_text) in [10 minutes](time_value)
+    - remind me to [call dad](reminder_text) at [5](time_value)
+    - set a reminder to [check the stove](reminder_text) in [15 minutes](time_value)
+    - remind me to [sleep early](reminder_text) tonight at [10](time_value)
+    - remind me to [join the meeting](reminder_text) at [3pm](time_value)
+    - remind me to [take medicine](reminder_text) at [9pm](time_value)
+    - set reminder for [workout](reminder_text) at [7pm](time_value)
+    - remind me in [30 minutes](time_value) to [check email](reminder_text)
+    - remind me tomorrow at [8am](time_value) to [water plants](reminder_text)
+    - remind me later at [6](time_value) to [prepare dinner](reminder_text)
     - remind me [prepare notes](reminder_text) in [30 minutes](time_value)
 
 # ======================================================
