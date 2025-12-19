@@ -8,7 +8,7 @@ spoken messages or automated narration.
 
 # Importing libraries
 from utils import logger
-from core import config
+from config import ex_config
 from typing import Any
 import subprocess
 import json
@@ -26,8 +26,8 @@ class SylvaTTSGenerator():
     # Generator setup
     def __init__(self):
         # Getting data from config.py
-        self.tts_model = config.TTS_MODEL_PATH
-        self.tts_model_name = config.TTS_MODEL_NAME
+        self.tts_model = ex_config.TTS_MODEL_PATH
+        self.tts_model_name = ex_config.TTS_MODEL_NAME
 
         # Define path
         self.linux_venv = f"{tts_path}/tts_venv/bin/activate"

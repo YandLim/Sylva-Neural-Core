@@ -1,4 +1,4 @@
-"""Give Sylva access to shutdown the system"""
+"""Grants Sylva authority to terminate system operations."""
 
 # Importing modules
 from utils import logger, play_voice
@@ -6,7 +6,7 @@ import random
 import os
 
 # Defining class
-log = logger.get_logger(__name__)
+system_log = logger.get_logger(__name__, system=True)
 
 # Sylva phrases tamplates
 shutdown_dialogues = {
@@ -56,7 +56,7 @@ def shutdown_confirmation(tts_agent):
     confirmation = tts_agent.sylva_voice(confirmation_phrase, "shutdown_confirmation.wav")
     play_voice.play_sound(confirmation)
 
-    log.debug("Sylva asked for shutdown approval")
+    system_log.info("Sylva asked for shutdown approval")
     return True # Turn on shutdown process
 
 
@@ -66,10 +66,10 @@ def shutdown_approval(tts_agent):
     phrase_format = confirm_phrase.format(seconds="10")
     approve = tts_agent.sylva_voice(phrase_format, "shutdown_approve.wav")
     play_voice.play_sound(approve)
-    log.debug("User approved the shutdown process")
+    system_log.info("User approved the shutdown process")
 
     # Shutting down the system
-    log.warning("Execute shutdown system\n\n")
+    system_log.warning("Execute shutdown system\n\n")
     os.system("shutdown /s /t 10")
     return
 
@@ -80,5 +80,5 @@ def shutdown_cancel(tts_agent):
     cancel = tts_agent.sylva_voice(cancel_phrase, "shutdown_cancel.wav")
     play_voice.play_sound(cancel)
 
-    log.debug("User canceled shutdown process")
+    system_log.info("User canceled shutdown process")
     return False # Turn of shutdown process

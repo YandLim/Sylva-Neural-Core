@@ -3,18 +3,24 @@ record messages and events, providing a trail of information
 for debugging, monitoring, and troubleshooting a running software application."""
 
 # Importing modules and libraries
-from core import config
+from config import in_config
 import logging
 import sys
 import os
 
-def get_logger(name: str):
+def get_logger(name: str, system: True|False=True):
     # Make a log folder to store log file
-    log_dir = config.LOG_FOLDER
+    log_dir = in_config.LOG_DIR
+    if system is True:
+        log_type = "system"
+        log_file = log_dir + r"\system_log.log"
+    else:
+        log_type = "user"
+        log_file = log_dir + r"\user_log.log"
     os.makedirs(log_dir, exist_ok=True)
 
     # Create the logger
-    logger = logging.getLogger(name)
+    logger = logging.getLogger(f"{log_type}.{name}")
     logger.setLevel(logging.DEBUG) # Show all logs (DEBUG, INFO, WARNING, ERROR, CRITICAL)
     
     # Avoid duplicate log 
@@ -33,7 +39,7 @@ def get_logger(name: str):
     console_handler.setFormatter(formatter)
 
     # Store log messages into the file
-    file_handler = logging.FileHandler(os.path.join(log_dir, "bot_log.log"), encoding="utf-8")
+    file_handler = logging.FileHandler(filename=log_file, encoding="utf-8")
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(formatter)
 

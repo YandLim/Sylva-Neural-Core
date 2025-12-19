@@ -165,7 +165,6 @@ nlu:
     - jot [plan meals for the week](note_text)
     - save note [prepare music playlist](note_text)
     - intent: note_create
-  examples: |
     - write this down [there will be a party at 5](note_text)
     - note [meeting starts at 3 not 4](note_text)
     - save this [version 2 needs refactor](note_text)

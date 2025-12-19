@@ -1,17 +1,29 @@
 # Importing modules
 import speech_recognition as sr
 from utils import logger
-from core import config
+from config import ex_config, in_config
 import whisper
 import audioop
 
 # Define class and variabels
-log = logger.get_logger(__name__)
-model = config.STT_MODEL
+system_log = logger.get_logger(__name__, system=True)
+model = ex_config.STT_MODEL
 stt_model = whisper.load_model(model)
 recognizer = sr.Recognizer()
 
+user_wav_path = in_config.USER_WAV
+
 # List of error text
+SYLVA_ALIASES = [
+    "silva",
+    "silver",
+    "sofa",
+    "shilpa",
+    "snail fire",
+    "selva",
+    "silvah",
+]
+
 error_text = [".", "You", "Okay.", "Thank you."]
 
 # Speech to text functionality
@@ -22,21 +34,21 @@ def speech_recognition() -> str:
             with sr.Microphone() as source:
                 audio = recognizer.listen(source, timeout=1, phrase_time_limit=10) # Listening
                 rms = audioop.rms(audio.frame_data, 2) # Audio level
-                log.debug(f"User rms: {rms}") # Print audio level
+                system_log.debug(f"User rms: {rms}") # Print audio level
 
                 # If audio shorter than 0.16 second or audio level is smaller than 85, count as invalid 
                 if len(audio.frame_data) < 6000 or rms < 95:
                     return None
-            
+
             # Convert user audio into wav file
             user_wav = audio.get_wav_data()
-            log.info("Processing voice")
-            with open("user_wav.wav", "wb") as f:
+            system_log.info("Processing voice")
+            with open(user_wav_path, "wb") as f:
                 f.write(user_wav)
 
             # Whisper STT
             result = stt_model.transcribe(
-                "user_wav.wav",
+                user_wav_path,
                 language="en",
                 task="transcribe",
                 no_speech_threshold=0.95,
@@ -51,9 +63,15 @@ def speech_recognition() -> str:
             text = result["text"].strip()
             if text:
                 # Checking if there is invalid word in the result
-                if len(text.split()) == 1 and any(text == error for error in error_text):
+                if len(text.split()) <= 1 and any(error in text for error in error_text):
                     return None
-                log.debug(f"stt proccess return {text}")
+                
+                # Handle invalid error word for Sylva
+                for aliases in SYLVA_ALIASES:
+                    if aliases in text:
+                        text = text.replace(aliases, "Sylva")
+
+                system_log.debug(f"stt proccess return: {text}")
                 return(text)
             else:
                 return None
@@ -64,5 +82,5 @@ def speech_recognition() -> str:
         
         # Sending error message if something went wrong
         except Exception as e:
-            log.error(f"Something went wrong: {e}")
+            system_log.error(f"Something went wrong: {e}")
             return None

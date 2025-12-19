@@ -2,15 +2,16 @@
 
 # Importing modules and libraries
 from utils import logger, play_voice
-from core import config
+from config import ex_config
 import serpapi
 import random
 
 # Get serpapi API key
-serpapi_apikey = config.SERPAPI_APIKEY
+serpapi_apikey = ex_config.SERPAPI_APIKEY
 
 # Define utility class
-log = logger.get_logger(__name__)
+system_log = logger.get_logger(__name__, system=True)
+user_log = logger.get_logger(__name__, system=False)
 
 # Sylva phrases templates
 sylva_search_templates = [
@@ -37,25 +38,24 @@ def web_search(query: str) -> str:
         )
 
     except TimeoutError:
-        log.error("Google search reach time limit")
+        system_log.error("Google search reach time limit")
         return None
     
     except Exception as e:
-        log.info("Something went wrong")
-        log.error(f"Error occured: {e}")
+        system_log.error(f"Error occured: {e}")
         return None
 
     if not google_search:
-        log.info("Sylva couldn’t find a clear answer")
+        system_log.debug("Sylva couldn’t find a clear answer")
         return None
     
     try:
         result = google_search["ai_overview"]["text_blocks"][0]["snippet"]
-        log.debug("Returning ai overview as result")
+        system_log.debug("Returning ai overview as result")
     except:
-        log.debug("Couldn't get ai overview")
+        system_log.debug("Couldn't get ai overview")
         result = google_search["organic_results"][0]["snippet"]
-        log.debug("Give the best match search instead")
+        system_log.debug("Give the best match search instead")
 
     finally:
         return result
@@ -67,12 +67,11 @@ def search_result(query: str, tts_agent):
     play_voice.play_sound(voice_path)
 
     result = web_search(query)
-    log.info("Return search result")
-    log.info("Proccessing the result")
+    system_log.info("Return search result")
+    system_log.info("Proccessing the result")
 
     result_path = tts_agent.sylva_voice(result, "web_search_result.wav")
     play_voice.play_sound(result_path)
 
-    log.debug(f"Search result: {result}")
-
-
+    system_log.debug(f"Search result: {result}")
+    user_log.info(f"Search result: {result}")

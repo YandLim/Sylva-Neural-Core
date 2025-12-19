@@ -1,4 +1,4 @@
-"""Greetings function file"""
+"""Handles system greetings and user acknowledgments."""
 
 # Importing modules and libraries
 from utils import logger, play_voice
@@ -6,8 +6,8 @@ from datetime import datetime
 import random
 
 # Getting class and function
-log = logger.get_logger(__name__)
-
+system_log = logger.get_logger(__name__, system=True)
+user_log = logger.get_logger(__name__, system=False)
 
 # Sylva phrases tamplates
 greetings_form = {
@@ -86,23 +86,32 @@ greetings_form = {
 
 # Checking current time
 current_time = datetime.now().hour
+system_log.debug(f"Current_time: {current_time}")
 
-# Greeting function
+# Main function
 def sylva_greet(tts_agent):
     # Respond according to current time
     if 5 <= current_time < 12:
+        template_time = "morning"
         choosen_greet = random.choice(greetings_form["morning"])
 
     elif 12 <= current_time < 19:
+        template_time = "day"
         choosen_greet = random.choice(greetings_form["day"])
 
     elif 19 <= current_time < 24:
+        template_time = "night"
         choosen_greet = random.choice(greetings_form["night"])
 
     else:
+        template_time = "midnight"
         choosen_greet = random.choice(greetings_form["midnight"])
+
+    # Debugging purpose log
+    system_log.debug(f"Template time: {template_time}")
 
     # Execute text-to-speech
     voice_path = tts_agent.sylva_voice(choosen_greet, "grettings.wav")
     play_voice.play_sound(voice_path)
-    log.debug(f"Sylva greeting: {choosen_greet}")
+    system_log.debug(f"Sylva greeting: {choosen_greet}")
+    user_log.info(f"Sylva: {choosen_greet}")

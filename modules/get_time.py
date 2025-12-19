@@ -1,4 +1,4 @@
-"""Give Sylva access into the current date"""
+"""Allows Sylva to perceive the current time."""
 
 # Importing modules
 from utils import logger, play_voice
@@ -6,7 +6,8 @@ from datetime import datetime
 import random
 
 # Define class
-log = logger.get_logger(__name__)
+system_log = logger.get_logger(__name__, system=True)
+user_log = logger.get_logger(__name__, system=False)
 
 # Sylva phrases tamplates
 time_templates = [
@@ -32,12 +33,19 @@ time_templates = [
     "The hour is {time}, Master."
 ]
 
-# Get time
+# Main function
 def current_time(tts_agent):
+    # Get time
     cur_time = datetime.now().strftime("%H:%M:%S")
+    system_log.debug(f"Time: {cur_time}")
+
+    # Choosing template
     choosen_template = random.choice(time_templates)
     sentences = choosen_template.format(time=cur_time) 
-    
+
     # Execute text-to-speech
     voice_path = tts_agent.sylva_voice(sentences, "get_time.wav")
     play_voice.play_sound(voice_path)
+
+    user_log.info(f"Sylva: {sentences}")
+    return

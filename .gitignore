@@ -9,12 +9,13 @@ user_wav.wav
 
 # Virtual environments
 .env
+.rasa
 .venv
 .vscode
-logs/
+
+# Folder
+attachment
 tts/tts_venv
 tts/dataset
 tts/Output
 rasa_nlu/rasa_venv
-.rasa
-user_note/
