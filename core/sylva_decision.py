@@ -95,6 +95,11 @@ def decision_making(tts_agent: TTSAgent, nlu_agent: NLUAgent, user_command: str,
             system_log.info("Remind me module complete. System standing by")
             return
         
+        else:
+            system_log.debug(f"User command: {e}")
+            system_log.debug("User command can't be understand")
+            return
+        
         # Execute text to speech from ran module
         execute_tts(tts_agent, module_result.sentence, module_result.context)
         return 
