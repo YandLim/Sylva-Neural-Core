@@ -95,8 +95,11 @@ def decision_making(tts_agent: TTSAgent, nlu_agent: NLUAgent, user_command: str,
             system_log.info("Remind me module complete. System standing by")
             return
         
+        elif intent == "deny" or intent == "affirm":
+            return
+        
         else:
-            system_log.debug(f"User command: {e}")
+            system_log.debug(f"User command: {user_command}")
             system_log.debug("User command can't be understand")
             return
         
