@@ -170,14 +170,17 @@ def set_reminder(context: str) -> None:
 def remind_me(tts_agent, interval: int) -> None:
     system_log.info("Start reminder module")
     try:
+        # Looping every certain seconds to check the reminder json
         while True:
             reminders = get_json_data()
             now = datetime.now()
 
+            # Checking each id from remind json file
             for rid in reminders["reminders"]:
                 current_reminder = reminders["reminders"][rid]
                 reminder_time = datetime.fromisoformat(current_reminder["time"])
 
+                # If time now is pass the time in the reminder but not reminded yet
                 if now >= reminder_time and current_reminder["status"] != "done":
                     reminder_ctx = current_reminder["context"]
                     isoed_time = reminder_time.isoformat()
@@ -185,6 +188,7 @@ def remind_me(tts_agent, interval: int) -> None:
                     system_log.debug(f"Reminder for: {reminder_ctx}")
                     system_log.debug(f"Current time: {now.isoformat()}, Reminder time: {isoed_time}")
                     
+                    # Updating reminder json file
                     reminders["reminders"][rid] = {
                         "context": reminder_ctx,
                         "time": isoed_time,
@@ -199,7 +203,7 @@ def remind_me(tts_agent, interval: int) -> None:
                     play_voice.play_sound(voice_path)
 
                     user_log.info(f"Sylva: {sentence}")
-
+            # Sleep for interval time after check the json file
             time.sleep(interval)
     except Exception as e:
         system_log.error("Ending reminde me module")

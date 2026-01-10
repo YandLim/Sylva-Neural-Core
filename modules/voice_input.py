@@ -1,9 +1,15 @@
+"""Voice input module is the module to determine, 
+rather sylva will take voice as input or text"""
+
+# Importing modules
 from utils.dataclasess import ModuleResults
 from utils import logger
 import random
 
+# Make logger
 system_log = logger.get_logger(__name__)
 
+# Sylva's templates
 templates = {
     "confirmation_phrases": [
         "Sir, would you like me to enable voice input?",
@@ -43,19 +49,21 @@ templates = {
     ]
 }
 
+# Asking for user's confirmation rather or not using voice as input
 def vcinput_confirmation() -> ModuleResults:
     sentence = random.choice(templates["confirmation_phrases"])
     system_log.info("Asking for user's confirmation on voice input function")
     
     return ModuleResults(sentence=sentence, context="vcinput_confirmation")
 
-
+# If use agree to use voice as input
 def vcinput_confirm() -> ModuleResults:
     sentence = random.choice(templates["affirm"])
     system_log.info("User confirm to use voice input module")
 
     return ModuleResults(sentence=sentence, context="vcinput_confirm", status=True)
 
+# Use text as input
 def vcinput_reject() -> ModuleResults:
     sentence = random.choice(templates["decline"])
     system_log.info("User decline to use voice input module")

@@ -1,3 +1,6 @@
+"""Use as output parameter for function to keep consistency"""
+
+# Importing libraries
 from dataclasses import dataclass
 from typing import Optional
 

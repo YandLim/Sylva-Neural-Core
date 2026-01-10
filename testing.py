@@ -1,3 +1,7 @@
+"""This module is stand alone module, and use
+for testing modules and function logic without using
+TTS or STT."""
+
 # Importing modules
 from modules import greetings, get_time, get_date, shutdown, web_search, create_note, open_app, remind_me, voice_input
 from utils import logger, play_voice, tts_generator
@@ -30,6 +34,7 @@ def decision_making(
             testing_log.warning("Shutdown requested")
             shutdown_pending = shutdown.shutdown_confirmation()
 
+            # Check if user use tts or not
             if tts_agent is not False:
                 execute_tts(tts_agent, shutdown_pending.sentence, shutdown_pending.context)                
             return shutdown_pending.sentence
@@ -41,6 +46,7 @@ def decision_making(
                 shutdown_cancel = shutdown.shutdown_cancel(tts_agent)
                 testing_log.info("Shutdown cancellation success")
 
+                # Check if user use tts or not
                 if tts_agent is not False:
                     execute_tts(tts_agent, shutdown_cancel.sentence, shutdown_cancel.context)              
                 return shutdown_pending.sentence
@@ -76,10 +82,10 @@ def decision_making(
             testing_log.info("Initializing web search module")
             module_result, search_result = web_search.search_result(value)
             
+            # Check if user use tts or not
             if tts_agent is not False:
                 execute_tts(tts_agent, module_result.sentence, module_result.context)
                 execute_tts(tts_agent, search_result, module_result.context)
-
             else:
                 testing_log.info(f"Output: {search_result}")
 
@@ -103,6 +109,7 @@ def decision_making(
             testing_log.info("Remind me module complete. System standing by")
             return
         
+        # Check if user use tts or not
         if tts_agent is not False:
             execute_tts(tts_agent, module_result.sentence, module_result.context)
         else:
@@ -113,28 +120,35 @@ def decision_making(
         testing_log.error(f"Something went wrong while running module: {e}")
         raise
 
+# The main testing function
 def main():
     testing_log.info("Starting sylva testing mode")
+    # Asking fro user's decision rather using text output or text output
     while True:
         vcoutput_confirmation = voice_input.vcinput_confirmation()
         user_decision = input(f"{vcoutput_confirmation.sentence}(Y/n)\n=> ").lower()
 
+        # If user agree
         if user_decision == "y":
             vcoutput = voice_input.vcinput_confirm()
             tts_agent = tts_generator.SylvaTTSGenerator()
             execute_tts(tts_agent, vcoutput.sentence, wav_ctx=vcoutput.context)
 
+        # If user not agree
         elif user_decision == "n":
             vcoutput = voice_input.vcinput_reject()
             testing_log.info(f"Sylva: {vcoutput.sentence}")
 
+        # If user halucinate
         else:
             print(f"{user_decision} is not Y or N")
             testing_log.warning("User decision is not recognized")
             continue
         break
     
+    # Looping to test modules, until user type break
     while True:
+        # The currently available commands     
         print("""
             Sylva's Commands and how to trigger:
             - Greetings(greet)
@@ -148,13 +162,17 @@ def main():
             - break"""
         )
 
+        # Asking for user command
         user_command = input("What is the command: ").lower()
-        for command in user_command.split():
+        for command in user_command.split():  # Checking for user command
             found = True
             breaked = False
+
+            # Basic command without value needed
             if command == "greet" or command == "get_time" or command == "get_date":
                 decision_making(command, False, tts_agent=tts_agent if vcoutput.status is True else False)
             
+            # Comment that need value
             elif command == "search_web" or command == "note_create" or command == "open_app":
                 value = input("Enter the value: ")
                 decision_making(command, False, tts_agent=tts_agent if vcoutput.status is True else False, value=value)
@@ -163,6 +181,7 @@ def main():
                 value = input("What time and what is the reminder context: ")
                 decision_making(command, False, tts_agent=tts_agent if vcoutput.status is True else False, user_command=value)
 
+            # Shutdown command
             elif command == "shutdown_system":
                 shutdown_pending = decision_making(command, False, tts_agent=tts_agent if vcoutput.status is True else False)
                 user_decision = input(f"{shutdown_pending}(Y/n): ").lower()
@@ -172,6 +191,7 @@ def main():
                 else:
                     decision_making("deny", True, tts_agent=tts_agent if vcoutput.status is True else False)
 
+            # If user want to end the system
             elif command == "break":
                 breaked = True
                 return
@@ -179,6 +199,7 @@ def main():
             else:
                 found = False
         
+        # If no command is found
         if found is False:
             if breaked is True:
                 break
