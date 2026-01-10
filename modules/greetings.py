@@ -1,8 +1,9 @@
 """Handles system greetings and user acknowledgments."""
 
 # Importing modules and libraries
-from utils import logger, play_voice
 from datetime import datetime
+from utils.dataclasess import ModuleResults
+from utils import logger
 import random
 
 # Getting class and function
@@ -84,12 +85,12 @@ greetings_form = {
     ]
 }
 
-# Checking current time
-current_time = datetime.now().hour
-system_log.debug(f"Current_time: {current_time}")
-
 # Main function
-def sylva_greet(tts_agent):
+def sylva_greet() -> ModuleResults:
+    # Checking current time
+    current_time = datetime.now().hour
+    system_log.debug(f"Current_time: {current_time}")
+
     # Respond according to current time
     if 5 <= current_time < 12:
         template_time = "morning"
@@ -109,9 +110,8 @@ def sylva_greet(tts_agent):
 
     # Debugging purpose log
     system_log.debug(f"Template time: {template_time}")
-
-    # Execute text-to-speech
-    voice_path = tts_agent.sylva_voice(choosen_greet, "grettings.wav")
-    play_voice.play_sound(voice_path)
     system_log.debug(f"Sylva greeting: {choosen_greet}")
-    user_log.info(f"Sylva: {choosen_greet}")
+    return ModuleResults(sentence=choosen_greet, context="greetings_module")
+
+if __name__ == "__main__":
+    sylva_greet()

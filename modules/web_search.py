@@ -1,7 +1,8 @@
 """Give Sylva access of web searching and provide answer"""
 
 # Importing modules and libraries
-from utils import logger, play_voice
+from utils import logger
+from utils.dataclasess import ModuleResults
 from config import ex_config
 import serpapi
 import random
@@ -28,6 +29,7 @@ sylva_search_templates = [
 ]
 
 
+# Executing web search function
 def web_search(query: str) -> str:
     serpapi_client = serpapi.Client(api_key=serpapi_apikey)
     try:
@@ -61,17 +63,12 @@ def web_search(query: str) -> str:
         return result
 
 
-def search_result(query: str, tts_agent):
+# Clean everything as result 
+def search_result(query: str) -> ModuleResults:
     choosen_template = random.choice(sylva_search_templates)
-    voice_path = tts_agent.sylva_voice(choosen_template, "web_search.wav")
-    play_voice.play_sound(voice_path)
 
     result = web_search(query)
     system_log.info("Return search result")
     system_log.info("Proccessing the result")
 
-    result_path = tts_agent.sylva_voice(result, "web_search_result.wav")
-    play_voice.play_sound(result_path)
-
-    system_log.debug(f"Search result: {result}")
-    user_log.info(f"Search result: {result}")
+    return ModuleResults(sentence=choosen_template, context="web_search_module"), result

@@ -76,3 +76,5 @@ class SylvaTTSGenerator():
         # Return the generate .wav file path
         return f"tts\Output\{outfile}"
     
+if __name__ == "__main__":
+    SylvaTTSGenerator()

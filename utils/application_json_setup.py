@@ -11,12 +11,6 @@ raw_path = Path(parent_path + r"\attachment\apps_raw.json")
 final_output = Path(parent_path + r"\attachment\application_path.json")
 new_json = {}
 
-
-# Opening raw_application.json
-with raw_path.open(encoding="utf-16") as f:
-    apps = json.load(f)
-
-
 # Cleaning json data
 def clean_json_data(application: list) -> dict:
     clean_json = {}
@@ -38,7 +32,7 @@ def clean_json_data(application: list) -> dict:
 
 
 # Remove windows unused system application
-def remove_unwanted_application(apps: json) -> dict:
+def remove_unwanted_application(apps: dict) -> dict:
     filtered = {}
 
     # List of keywords to remove
@@ -96,7 +90,7 @@ def remove_unwanted_application(apps: json) -> dict:
     
 
 # Adding aliassess to the cleaned json
-def add_aliasess(data: dict) -> json:
+def add_aliasess(data: dict) -> dict:
     final_json = {}
     for key, value in data.items():
         aliases = []
@@ -122,6 +116,14 @@ def add_aliasess(data: dict) -> json:
 
 # Main script runner
 if __name__ == "__main__":
+    # Opening raw_application.json
+    try:
+        with raw_path.open(encoding="utf-8-sig") as f:
+            apps = json.load(f)
+    except:
+        with raw_path.open(encoding="utf-16") as f:
+            apps = json.load(f)
+
     # Proccessing the json file
     app_path = clean_json_data(apps)
     cleaned_json = remove_unwanted_application(app_path)

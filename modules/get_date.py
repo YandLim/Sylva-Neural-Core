@@ -1,8 +1,9 @@
 """Allows Sylva to perceive the current date."""
 
 # Importing modules
-from utils import logger, play_voice
+from utils.dataclasess import ModuleResults
 from datetime import datetime
+from utils import logger
 import random
 
 # Define class
@@ -34,18 +35,16 @@ date_templates = [
 ]
 
 # Main date function
-def current_date(tts_agent):
+def current_date() -> ModuleResults:
     # Get date
     cur_date = datetime.now().strftime("%A, %d %B %Y")
     system_log.debug(f"Date: {cur_date}")
 
     # Choose template
     choosen_template = random.choice(date_templates)
-    sentences = choosen_template.format(date=cur_date) 
+    sentence = choosen_template.format(date=cur_date) 
     
-    # Execute text-to-speech
-    voice_path = tts_agent.sylva_voice(sentences, "get_time.wav")
-    play_voice.play_sound(voice_path)
-    user_log.info(f"Sylva: {sentences}")
+    return ModuleResults(sentence=sentence, context="get_date_module")
 
-    return
+if __name__ == "__main__":
+    current_date()

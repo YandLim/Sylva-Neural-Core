@@ -1,9 +1,10 @@
 # Importing modules and libraries
-from utils import logger, tts_generator, play_voice
+from modules import greetings, remind_me, voice_input
+from utils import logger, tts_generator
 from core import stt, sylva_decision
-from rasa.core.agent import Agent
-from modules import greetings, get_time
+from rasa.core.agent import Agent 
 from config import ex_config
+from threading import Thread
 import random
 import time
 
@@ -22,7 +23,7 @@ last_wake_time = 0
 run_time = 0
 
 # wake up Keyword and goodbye templates
-wake_word = ["sylva", "wake up", "wakey wakey"]
+wake_word = ["sylva", "wake up", "wakey wakey", "silva", "silfa"]
 sylva_templates = {
     "entering_sleep_mode": [
         "Standby mode engaged. Awaiting your next call, Master.",
@@ -46,34 +47,61 @@ sylva_templates = {
     ]
 }
 
-# Break module
-def breaking_system():
-    system_log.info("Shutdown Sylva system\n\n")
+# Breaking system module
+def breaking_system() -> None:
+    system_log.warning("Preparing to shutdown Sylva's system")
     farewell_phrase = random.choice(sylva_templates["goodbye_templates"])
-    break_voice_path = tts.sylva_voice(farewell_phrase, "farewell.wav")
-    play_voice.play_sound(break_voice_path)
+    sylva_decision.execute_tts(tts_agent, farewell_phrase, "farewell.wav")
+    system_log.warning("Shutdown Sylva system\n\n")
     return True
 
 # Main functionality
 if __name__ == "__main__":
     try:
         # Load agents
-        tts = tts_generator.SylvaTTSGenerator()
+        tts_agent = tts_generator.SylvaTTSGenerator()
         nlu_agent = Agent.load(nlu_model_path)
         sylva_active = True
 
         # Generate log
         system_log.info("Activating model")
         user_log.info("Activating model")
-        greetings.sylva_greet(tts)
+        greeting_result = greetings.sylva_greet()
+        sylva_decision.execute_tts(tts_agent, greeting_result.sentence, greeting_result.context)
+
+        # Activate reminder threading
+        system_log.info("Activating reminder thread")
+        Thread(target=remind_me.remind_me, args=(tts_agent, 5,), daemon=True).start()
+
+        # Asking confirmation for voice input module
+        vcinput_confirmation = voice_input.vcinput_confirmation()
+        sylva_decision.execute_tts(tts_agent, vcinput_confirmation.sentence, vcinput_confirmation.context)
+
+        while True:
+            user_decision = input(f"{vcinput_confirmation.sentence}(Y/n)\n=> ").lower()
+            system_log.debug(f"User decision: {user_decision}")
+            user_log.info(f"User: {user_decision}")
+            if user_decision == "y":
+                vcinput = voice_input.vcinput_confirm()
+            elif user_decision == "n":
+                vcinput = voice_input.vcinput_reject()
+            else:
+                print(f"{user_decision} is not Y or N")
+                system_log.warning("User decision is not recognized")
+                continue
+            sylva_decision.execute_tts(tts_agent, vcinput.sentence, wav_ctx=vcinput.context)
+            break
 
         # Looping until user deactivate Sylva
         while True:
             run_time += 1
-            # Speech to text function
-            user_command = stt.speech_recognition()
+            # Determine if the system use voice input module or text input module
+            if vcinput.status is True:
+                user_command = stt.speech_recognition()
+            else:
+                user_command = input("Master, Your Command: ")
 
-            # Checking command avaiblity
+            # Checking command availability
             now = time.time()
             if user_command is not None:
                 user_log.info(f"USER: {user_command}")
@@ -93,9 +121,10 @@ if __name__ == "__main__":
                                 if break_status is True:
                                     break
 
-                            sylva_decision.decision_making(tts, nlu_agent, user_command, shutdown_pending)
+                            sylva_decision.decision_making(tts_agent, nlu_agent, user_command, shutdown_pending)
                         else:
-                            greetings.sylva_greet(tts)
+                            module_result = greetings.sylva_greet()
+                            sylva_decision.execute_tts(tts_agent, module_result.sentence, wav_ctx=module_result.context)
 
                         continue
                     else:
@@ -111,8 +140,7 @@ if __name__ == "__main__":
             # If timer is more than auto_sleep Sylva going down
             if now - last_wake_time > auto_sleep and run_time != 1 and sylva_active is True:
                 random_sleep_phrase = random.choice(sylva_templates["entering_sleep_mode"])
-                sleep_voice = tts.sylva_voice(random_sleep_phrase, "sleep.wav")
-                play_voice.play_sound(sleep_voice)
+                sylva_decision.execute_tts(tts_agent, random_sleep_phrase, "sleep.wav")
                 system_log.info("Sylva entering sleep mode")
                 user_log.info(f"Sylva: {random_sleep_phrase}")
                 sylva_active = False
@@ -128,7 +156,10 @@ if __name__ == "__main__":
                     break
 
             # Update last wake time and do commands
-            shutdown_pending = sylva_decision.decision_making(tts, nlu_agent, user_command, shutdown_pending)
+            shutdown_pending = sylva_decision.decision_making(tts_agent, nlu_agent, user_command, shutdown_pending)
             last_wake_time = time.time()
     except Exception as e:
-        system_log.error(f"Something wen wrong while running the program: {e}\n\n")
+        system_log.error(f"Something went wrong while running the program: {e}\n\n")
+
+    except KeyboardInterrupt:
+        system_log.error(f"Keyboard interupting has detected. Turn of the system\n\n")

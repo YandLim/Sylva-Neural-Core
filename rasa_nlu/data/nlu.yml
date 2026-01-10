@@ -3,7 +3,7 @@ version: "3.1"
 nlu:
 
 # ======================================================
-# GREET (50 EXAMPLES)
+# GREET
 # ======================================================
 - intent: greet
   examples: |
@@ -58,7 +58,7 @@ nlu:
     - greeting system
 
 # ======================================================
-# OPEN APP (50 EXAMPLES)
+# OPEN APP
 # ======================================================
 - intent: open_app
   examples: |
@@ -115,7 +115,7 @@ nlu:
     - open [after effects](app_name)
 
 # ======================================================
-# NOTE CREATE (50 EXAMPLES)
+# NOTE CREATE
 # ======================================================
 - intent: note_create
   examples: |
@@ -164,7 +164,6 @@ nlu:
     - note [remember to call mom tonight](note_text)
     - jot [plan meals for the week](note_text)
     - save note [prepare music playlist](note_text)
-    - intent: note_create
     - write this down [there will be a party at 5](note_text)
     - note [meeting starts at 3 not 4](note_text)
     - save this [version 2 needs refactor](note_text)
@@ -188,7 +187,7 @@ nlu:
 
 
 # ======================================================
-# SEARCH WEB (50 EXAMPLES)
+# SEARCH WEB
 # ======================================================
 - intent: search_web
   examples: |
@@ -243,7 +242,7 @@ nlu:
     - search [best budget monitors for coding](search_query)
 
 # ======================================================
-# GET TIME (50 EXAMPLES)
+# GET TIME
 # ======================================================
 - intent: get_time
   examples: |
@@ -298,7 +297,7 @@ nlu:
     - what's my current time
 
 # ======================================================
-# GET DATE (50 EXAMPLES)
+# GET DATE
 # ======================================================
 - intent: get_date
   examples: |
@@ -353,7 +352,7 @@ nlu:
     - calendar check
 
 # ======================================================
-# SHUTDOWN SYSTEM (50 EXAMPLES)
+# SHUTDOWN SYSTEM
 # ======================================================
 - intent: shutdown_system
   examples: |
@@ -407,67 +406,61 @@ nlu:
     - shut it all down
 
 # ======================================================
-# REMIND ME (50 EXAMPLES)
+# REMIND ME
 # ======================================================
 - intent: remind_me
   examples: |
-    - remind me to [drink water](reminder_text) in [10 minutes](time_value)
-    - remind me [call dad](reminder_text) in [1 hour](time_value)
-    - remind me to [cook rice](reminder_text) in [20 minutes](time_value)
-    - remind me [study python](reminder_text) tonight at [9](time_value)
-    - remind me [take medicine](reminder_text) at [9pm](time_value)
-    - remind me in [5 minutes](time_value) to [check the stove](reminder_text)
-    - set a reminder to [wash dishes](reminder_text) in [15 minutes](time_value)
-    - remind me to [sleep early](reminder_text) at [10pm](time_value)
-    - remind me [prepare slides](reminder_text) tomorrow at [2pm](time_value)
-    - remind me to [clean my room](reminder_text) in [25 minutes](time_value)
-    - remind me [drink coffee](reminder_text) in [3 hours](time_value)
-    - remind me [update github](reminder_text) after [1 hour](time_value)
-    - remind me [practice english](reminder_text) at [9pm](time_value)
-    - remind me to [water the plants](reminder_text) tomorrow at [8am](time_value)
-    - remind me [organize files](reminder_text) in [20 minutes](time_value)
-    - remind me [buy groceries](reminder_text) this evening at [6](time_value)
-    - remind me [send email](reminder_text) at [4pm](time_value)
-    - remind me to [charge phone](reminder_text) at [11pm](time_value)
-    - remind me to [reply messages](reminder_text) after [30 minutes](time_value)
-    - remind me [workout](reminder_text) at [7pm](time_value)
-    - remind me [review notes](reminder_text) in [45 minutes](time_value)
-    - remind me to [hydrate](reminder_text) every [30 minutes](time_value)
-    - remind me [finish homework](reminder_text) at [11am](time_value)
-    - remind me [learn fastapi](reminder_text) tomorrow morning at [7](time_value)
-    - remind me in [10 minutes](time_value) to [rest my eyes](reminder_text)
-    - remind me [book haircut](reminder_text) at [3pm](time_value)
-    - remind me to [feed the cat](reminder_text) in [1 hour](time_value)
-    - remind me [prepare lunch](reminder_text) in [40 minutes](time_value)
-    - remind me [check email](reminder_text) in [20 minutes](time_value)
-    - remind me [finish assignment](reminder_text) at [11am](time_value)
-    - remind me [update project status](reminder_text) in [1 hour](time_value)
-    - remind me [take vitamin](reminder_text) at [8am](time_value)
-    - remind me [download files](reminder_text) in [10 minutes](time_value)
-    - remind me [buy food](reminder_text) at [12pm](time_value)
-    - remind me [call my sister](reminder_text) this afternoon at [3](time_value)
-    - remind me [check windows updates](reminder_text) in [15 minutes](time_value)
-    - remind me [practice mandarin](reminder_text) at [9pm](time_value)
-    - remind me to [clean desk](reminder_text) after [1 hour](time_value)
-    - remind me to [review code](reminder_text) tonight at [10](time_value)
-    - remind me [prepare coffee](reminder_text) in [5 minutes](time_value)
-    - remind me [start cooking](reminder_text) in [25 minutes](time_value)
-    - remind me [shower](reminder_text) in [30 minutes](time_value)
-    - remind me [check my phone](reminder_text) at [2pm](time_value)
-    - remind me to [drink water](reminder_text) in [10 minutes](time_value)
-    - remind me to [call dad](reminder_text) at [5](time_value)
-    - set a reminder to [check the stove](reminder_text) in [15 minutes](time_value)
-    - remind me to [sleep early](reminder_text) tonight at [10](time_value)
-    - remind me to [join the meeting](reminder_text) at [3pm](time_value)
-    - remind me to [take medicine](reminder_text) at [9pm](time_value)
-    - set reminder for [workout](reminder_text) at [7pm](time_value)
-    - remind me in [30 minutes](time_value) to [check email](reminder_text)
-    - remind me tomorrow at [8am](time_value) to [water plants](reminder_text)
-    - remind me later at [6](time_value) to [prepare dinner](reminder_text)
-    - remind me [prepare notes](reminder_text) in [30 minutes](time_value)
+    - remind me in [10 seconds](time_value)
+    - remind me in [30 seconds](time_value)
+    - remind me in [1 minute](time_value)
+    - remind me in [5 minutes](time_value)
+    - remind me in [10 minutes](time_value)
+    - remind me in [15 minutes](time_value)
+    - remind me in [20 minutes](time_value)
+    - remind me in [30 minutes](time_value)
+    - remind me in [45 minutes](time_value)
+    - remind me in [1 hour](time_value)
+    - remind me in [2 hours](time_value)
+    - remind me in [3 hours](time_value)
+    - remind me in [4 hours](time_value)
+    - remind me after [10 minutes](time_value)
+    - remind me after [30 minutes](time_value)
+    - remind me after [1 hour](time_value)
+    - remind me after [2 hours](time_value)
+    - remind me at [7am](time_value)
+    - remind me at [8am](time_value)
+    - remind me at [9am](time_value)
+    - remind me at [10am](time_value)
+    - remind me at [11am](time_value)
+    - remind me at [12pm](time_value)
+    - remind me at [1pm](time_value)
+    - remind me at [2pm](time_value)
+    - remind me at [3pm](time_value)
+    - remind me at [4pm](time_value)
+    - remind me at [5pm](time_value)
+    - remind me at [6pm](time_value)
+    - remind me at [7pm](time_value)
+    - remind me at [8pm](time_value)
+    - remind me at [9pm](time_value)
+    - remind me at [10pm](time_value)
+    - remind me at [11pm](time_value)
+    - remind me tomorrow at [7am](time_value)
+    - remind me tomorrow at [8am](time_value)
+    - remind me tomorrow at [9am](time_value)
+    - remind me tomorrow at [10am](time_value)
+    - remind me tomorrow at [12pm](time_value)
+    - remind me tomorrow at [2pm](time_value)
+    - remind me tomorrow at [4pm](time_value)
+    - remind me tomorrow at [6pm](time_value)
+    - remind me tomorrow at [8pm](time_value)
+    - remind me tomorrow at [10pm](time_value)
+    - remind me in [90 minutes](time_value)
+    - remind me after [45 minutes](time_value)
+    - remind me in [6 hours](time_value)
+    - remind me after [12 hours](time_value)
 
 # ======================================================
-# AFFIRM (50 EXAMPLES)
+# AFFIRM
 # ======================================================
 - intent: affirm
   examples: |
@@ -522,7 +515,7 @@ nlu:
     - okay that's correct
 
 # ======================================================
-# DENY (50 EXAMPLES)
+# DENY
 # ======================================================
 - intent: deny
   examples: |

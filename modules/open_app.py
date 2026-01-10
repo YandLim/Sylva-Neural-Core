@@ -1,8 +1,9 @@
 """Grants Sylva authority to running application installed in the machine."""
 
 # Importing modules 
-from utils import logger, play_voice
+from utils.dataclasess import ModuleResults
 from config import in_config
+from utils import logger
 from pathlib import Path
 import subprocess
 import ctypes
@@ -46,7 +47,7 @@ sylva_template = {
 
 
 # Collecting json_data 
-def get_json_data(json_path):
+def get_json_data(json_path: Path) -> dict:
     application_data = {}
     with json_path.open(encoding="utf-16") as f:
         data = json.load(f)
@@ -62,7 +63,7 @@ def get_json_data(json_path):
 
 
 # Function to open as admin
-def run_as_admin(exe_path):
+def run_as_admin(exe_path: Path) -> None:
     exe_path = os.path.abspath(exe_path)
     cwd = os.path.dirname(exe_path)
 
@@ -79,9 +80,11 @@ def run_as_admin(exe_path):
         log.debug(f"ShellExecuteW failed, code={r}")
         raise OSError(f"ShellExecuteW failed, code={r}")
 
+    return
+
 
 # Main open app function
-def open_app(user_input):
+def open_app(user_input: str) -> True | False:
     found = False
     application_data = get_json_data(json_path)
 
@@ -145,20 +148,21 @@ def open_app(user_input):
 
 
 # Sylva run the module
-def run_module(tts_agent, value):
-    openning_app = open_app(value)
+def run_module(application_name: str) -> ModuleResults:
+    openning_app = open_app(application_name)
+    
+    # If app is found and not found
     if openning_app is True:
         phrase = random.choice(sylva_template["success"])
-        fromatted_phrase = phrase.format(app_name=value)
+        sentence = phrase.format(app_name=application_name)
+        context = "running_app_success"
 
-        tts_path = tts_agent.sylva_voice(fromatted_phrase, "running_app_success.wav")
-        play_voice.play_sound(tts_path)
     else:
         phrase = random.choice(sylva_template["failed"])
-        fromatted_phrase = phrase.format(app=value)
-
-        tts_path = tts_agent.sylva_voice(fromatted_phrase, "running_app_failed.wav")
-        play_voice.play_sound(tts_path)
+        sentence = phrase.format(app=application_name)
+        context = "running_app_failed"
     
-    user_log.info(f"Sylva: {fromatted_phrase}")
-    return
+    return ModuleResults(sentence=sentence, context=context)
+
+if __name__ == "__main__":
+    run_module(None)

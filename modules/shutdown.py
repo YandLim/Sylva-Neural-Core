@@ -1,7 +1,9 @@
 """Grants Sylva authority to terminate system operations."""
 
 # Importing modules
+from utils.dataclasess import ModuleResults
 from utils import logger, play_voice
+from utils.function_hint import TTSAgent
 import random
 import os
 
@@ -51,34 +53,27 @@ shutdown_dialogues = {
 }
 
 # Confirming decision
-def shutdown_confirmation(tts_agent):
+def shutdown_confirmation() -> ModuleResults:
     confirmation_phrase = random.choice(shutdown_dialogues["shutdown_confirmation"])
-    confirmation = tts_agent.sylva_voice(confirmation_phrase, "shutdown_confirmation.wav")
-    play_voice.play_sound(confirmation)
+    system_log.warning("Sylva asked for shutdown approval")
 
-    system_log.info("Sylva asked for shutdown approval")
-    return True # Turn on shutdown process
+    # Turn on shutdown process
+    return ModuleResults(sentence=confirmation_phrase, context="shutdown_confirmation", status=True)
 
 
 # Shutdown confimed
-def shutdown_approval(tts_agent):
+def shutdown_approval(tts_agent: TTSAgent) -> ModuleResults:
     confirm_phrase = random.choice(shutdown_dialogues["shutdown_approve"])
     phrase_format = confirm_phrase.format(seconds="10")
-    approve = tts_agent.sylva_voice(phrase_format, "shutdown_approve.wav")
-    play_voice.play_sound(approve)
-    system_log.info("User approved the shutdown process")
+    system_log.warning("User approved the shutdown process")
+    return ModuleResults(phrase_format, context="shutdown_approve")
 
-    # Shutting down the system
-    system_log.warning("Execute shutdown system\n\n")
-    os.system("shutdown /s /t 10")
-    return
+def shutdown():
+        os.system("shutdown /s /t 10")
 
 
 # Shutdown canceled
-def shutdown_cancel(tts_agent):
-    cancel_phrase = random.choice(shutdown_dialogues["shutdown_cancel"])
-    cancel = tts_agent.sylva_voice(cancel_phrase, "shutdown_cancel.wav")
-    play_voice.play_sound(cancel)
-
-    system_log.info("User canceled shutdown process")
-    return False # Turn of shutdown process
+def shutdown_cancel(tts_agent: TTSAgent) -> ModuleResults:
+    sentence = random.choice(shutdown_dialogues["shutdown_cancel"])
+    system_log.warning("User canceled shutdown process")
+    return ModuleResults(sentence=sentence, context="shutdown_cancel", status=False)

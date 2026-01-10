@@ -1,10 +1,12 @@
 """create_note. Responsible for note creation, validation, and storage."""
 
 # Importing modules
-from utils import logger, play_voice
+from utils.dataclasess import ModuleResults
+from utils import logger
 from datetime import datetime
 from config import in_config
 import random 
+import os
 
 # Define logger
 system_log = logger.get_logger(__name__, system=True)
@@ -29,8 +31,11 @@ note_dir = in_config.NOTES_DIR
 current_time = datetime.now().strftime("%m-%d-%Y %H_%M_%S {title}.txt")
 
 # Main function
-def create_note(tts_agent, value):
+def create_note(value: str) -> ModuleResults:
     try:
+        # Checking the availability of the note directory
+        os.makedirs(note_dir, exist_ok=True)
+
         # Checking for invalid note
         system_log.debug(f"Value len: {len(value)}")
         if len(value) > 7: 
@@ -41,22 +46,23 @@ def create_note(tts_agent, value):
             system_log.info(f"Creating note: {complete_title}")
 
             # Writing note
-            with open (f"{note_dir}/{complete_title}", "w", encoding="utf-8") as f:
+            note_path = os.path.join(note_dir, complete_title)
+            with open (note_path, "w", encoding="utf-8") as f:
                 system_log.debug(f"Note value: {value}")
                 f.write(value)
-        
+
             # Voice confirmation
-            confirmation_phrase = random.choice(note_create_confirm)
-            phrase_path = tts_agent.sylva_voice(confirmation_phrase, "note_created.wav")
-            play_voice.play_sound(phrase_path)
-            user_log.info(f"Sylva: {confirmation_phrase}")
-            return
-        
-        # Return if note invalid
+            sentence = random.choice(note_create_confirm)
+            return ModuleResults(sentence=sentence, context="create_note_module")
+
+        # raise IndexError if note is invalid
         system_log.warning("Invalid note")
-        return
+        raise IndexError("The word in note is less than 7 and count as not valid")
 
     # Error occured
     except Exception as e:
         system_log.error(f"Something went wrong: {e}")
-        return
+        raise
+
+if __name__ == "__main__":
+    create_note(None)

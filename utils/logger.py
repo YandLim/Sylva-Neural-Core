@@ -3,21 +3,31 @@ record messages and events, providing a trail of information
 for debugging, monitoring, and troubleshooting a running software application."""
 
 # Importing modules and libraries
+from datetime import datetime
 from config import in_config
 import logging
 import sys
 import os
 
-def get_logger(name: str, system: True|False=True):
+current_month = datetime.now().strftime("%Y-%B")
+def get_logger(name: str, system: bool=True, testing: bool=False):
     # Make a log folder to store log file
     log_dir = in_config.LOG_DIR
-    if system is True:
+    month_dir = os.path.join(log_dir, f"{current_month}_logs")
+
+    if testing is True:
+        log_type = "debug"
+        log_file = log_file = os.path.join(month_dir, "debug.log")
+
+    elif system is True:
         log_type = "system"
-        log_file = log_dir + r"\system_log.log"
+        log_file = os.path.join(month_dir, "system_log.log")
+        
     else:
         log_type = "user"
-        log_file = log_dir + r"\user_log.log"
-    os.makedirs(log_dir, exist_ok=True)
+        log_file = os.path.join(month_dir, "user_log.log")
+
+    os.makedirs(month_dir, exist_ok=True)
 
     # Create the logger
     logger = logging.getLogger(f"{log_type}.{name}")
