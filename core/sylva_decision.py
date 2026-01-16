@@ -1,3 +1,5 @@
+"""Handles intent-to-action routing and ensures controlled execution of Sylva’s modules."""
+
 # Importing modules
 from modules import greetings, get_time, get_date, shutdown, web_search, create_note, open_app, remind_me
 from utils.function_hint import TTSAgent, NLUAgent

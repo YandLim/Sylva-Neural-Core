@@ -1,7 +1,8 @@
 [project]
-name = "sylva-neural-core-v1"
+sylva = "sylva.main:run"
+name = "sylva-neural-core"
 version = "0.1.0"
-description = "Add your description here"
+description = "local-first backend service that routes voice and command input into automated system actions without relying on cloud services."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [

@@ -6547,7 +6547,7 @@ wheels = [
 ]
 
 [[package]]
-name = "sylva-neural-core-v1"
+name = "sylva-neural-core"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

@@ -1,3 +1,5 @@
+"""Listens, transcribes, and forwards user speech without interpretation or decision logic."""
+
 # Importing modules
 import speech_recognition as sr
 from utils import logger
