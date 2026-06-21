@@ -41,11 +41,17 @@ class SylvaTTSGenerator():
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
+            errors='replace',
+            encoding='utf-8',
             text=True
         )
 
         # Make sure the worker are ready
         while True:
+            if self.worker.poll() is not None:
+                err = self.worker.stderr.read()
+                raise RuntimeError(f"TTS worker crashed on startup: {err}")
+            
             ready = self.worker.stdout.readline().strip()
             if ready == "":
                 continue
