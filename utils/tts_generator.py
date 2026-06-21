@@ -19,7 +19,7 @@ log = logger.get_logger(__name__)
 
 # Get current path
 current_path = os.getcwd().replace("\\", "/").replace(":", "").replace("Z", "z")
-tts_path = f"/mnt/{current_path}/tts"
+linux_tts_path = f"/mnt/{current_path}/tts"
 
 # Make text-to-speech class
 class SylvaTTSGenerator():
@@ -30,8 +30,8 @@ class SylvaTTSGenerator():
         self.tts_model_name = ex_config.TTS_MODEL_NAME
 
         # Define path
-        self.linux_venv = f"{tts_path}/tts_venv/bin/activate"
-        self.generator_path = f"{tts_path}/generate.py"   
+        self.linux_venv = f"{linux_tts_path}/tts_venv/bin/activate"
+        self.generator_path = f"{linux_tts_path}/generate.py"   
 
         # Execute subprocess in linux
         log.debug("Running linux server")
@@ -56,10 +56,13 @@ class SylvaTTSGenerator():
 
     # Generate the voice
     def sylva_voice(self, text:Any, outfile:str, language:str|None=None) -> str:
-        output_path = f"{tts_path}/Output/{outfile}"
+        mct_output_path = f"{linux_tts_path}/Output/{outfile}"
+        windows_output_path = f"tts\Output"
+
+        os.makedirs(windows_output_path, exist_ok=True)
 
         # Sending data to generate.py in linux
-        payload = {"text":text, "speaker":self.tts_model_name, "language":language, "outfile":output_path} 
+        payload = {"text":text, "speaker":self.tts_model_name, "language":language, "outfile":mct_output_path} 
         self.worker.stdin.write(json.dumps(payload) + "\n")
         self.worker.stdin.flush()
 
@@ -74,7 +77,7 @@ class SylvaTTSGenerator():
             break
        
         # Return the generate .wav file path
-        return f"tts\Output\{outfile}"
+        return f"{windows_output_path}\{outfile}"
     
 if __name__ == "__main__":
     SylvaTTSGenerator()

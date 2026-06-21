@@ -37,7 +37,10 @@ def decision_making(
             # Check if user use tts or not
             if tts_agent is not False:
                 execute_tts(tts_agent, shutdown_pending.sentence, shutdown_pending.context)                
-            return shutdown_pending.sentence
+            try:
+                return shutdown_pending.sentence
+            except Exception as e:
+                testing_log.error(f"Error occured while executing shutdown: {e}")
 
         if shutdown_pending:
             # Shutdown canceled

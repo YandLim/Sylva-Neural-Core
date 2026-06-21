@@ -12,10 +12,10 @@ user_wav.wav
 .rasa
 .venv
 .vscode
+tts/tts_venv
 
 # Folder
 attachment
-tts/tts_venv
 tts/dataset
 tts/Output
 rasa_nlu/rasa_venv
