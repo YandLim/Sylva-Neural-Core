@@ -78,7 +78,7 @@ if __name__ == "__main__":
         sylva_decision.execute_tts(tts_agent, vcinput_confirmation.sentence, vcinput_confirmation.context)
 
         while True:
-            user_decision = input(f"{vcinput_confirmation.sentence}(Y/n)\n=> ").lower()
+            user_decision = input(f"{vcinput_confirmation.sentence}(Y/n)=> ").lower()
             system_log.debug(f"User decision: {user_decision}")
             user_log.info(f"User: {user_decision}")
             if user_decision == "y":

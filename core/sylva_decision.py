@@ -28,9 +28,9 @@ def decision_making(tts_agent: TTSAgent, nlu_agent: NLUAgent, user_command: str,
         # shutdown_system confirmation
         if intent == "shutdown_system":
             system_log.warning("Shutdown requested")
-            shutdown_pending = shutdown.shutdown_confirmation()
-            execute_tts(tts_agent, shutdown_pending.sentence, shutdown_pending.context)
-            return
+            shutdown_output = shutdown.shutdown_confirmation()
+            execute_tts(tts_agent, shutdown_output.sentence, shutdown_output.context)
+            return shutdown_output.status
 
         if shutdown_pending:
             # Shutdown canceled
@@ -40,7 +40,7 @@ def decision_making(tts_agent: TTSAgent, nlu_agent: NLUAgent, user_command: str,
                 system_log.info("Shutdown cancellation success")
 
                 execute_tts(tts_agent, shutdown_cancel.sentence, shutdown_cancel.context)
-                return
+                return False
 
             # Execute shutdown module
             else:
