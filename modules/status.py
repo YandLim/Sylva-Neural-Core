@@ -10,7 +10,7 @@ system_log = logger.get_logger(__name__, system=True)
 user_log = logger.get_logger(__name__, system=False)
 
 # Sylva phrases tamplates
-ask_condition_templates = {
+status_templates = {
     "chill": [
         "Running fine, Sir. No complaints.",
         "All good here, Master. Nothing to report.",
@@ -68,8 +68,8 @@ ask_condition_templates = {
 
 # Main function
 def status_report() -> ModuleResults:
-    response_category = random.choice(list(ask_condition_templates.keys()))
-    choosen_respond = random.choice(ask_condition_templates[response_category])
+    response_category = random.choice(list(status_templates.keys()))
+    choosen_respond = random.choice(status_templates[response_category])
 
     system_log.debug(f"Sylva status report: {choosen_respond}")
     return ModuleResults(sentence=choosen_respond, context="status_module")

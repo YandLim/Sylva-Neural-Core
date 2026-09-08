@@ -1,7 +1,6 @@
 version: "3.1"
 
 nlu:
-
 # ======================================================
 # GREET
 # ======================================================
@@ -333,9 +332,9 @@ nlu:
     - tell me about the [custom fields](feature) option
 
 # ======================================================
-# ASK_CONDITION
+# STATUS
 # ======================================================
-- intent: ask_condition
+- intent: status
   examples: |
     - how are you
     - how are you doing
@@ -515,61 +514,6 @@ nlu:
     - save this [build finished in 9 minutes](note_text)
     - write [room 7 needs cleaning](note_text)
     - note [class starts at 10 but no reminder needed](note_text)
-
-# ======================================================
-# SEARCH WEB
-# ======================================================
-- intent: search_web
-  examples: |
-    - search for [python tutorials for beginners](search_query)
-    - google [best laptop 2025 under $1000](search_query)
-    - look up [weather in jakarta](search_query)
-    - search [best games releasing in 2025](search_query)
-    - find [meaning of resilience](search_query)
-    - google this [why is my wifi slow today](search_query)
-    - search [how many decades are in a century](search_query)
-    - look up [history of mandarin language](search_query)
-    - search [why cats sleep so much](search_query)
-    - find [top anime this season](search_query)
-    - google [fastapi tutorial](search_query)
-    - search [best programming headphones](search_query)
-    - search for [python dictionary comprehension examples](search_query)
-    - check [bitcoin price right now](search_query)
-    - google [why my laptop overheats](search_query)
-    - search [healthy meal prep ideas](search_query)
-    - find [how to stop procrastinating](search_query)
-    - look up [most powerful anime characters 2025](search_query)
-    - google [difference between ssd and hdd](search_query)
-    - search [gaming laptops under 15 million](search_query)
-    - search [how to clean mechanical keyboard](search_query)
-    - look up [simple workout routine](search_query)
-    - google [how loud is 60 decibels](search_query)
-    - search [best microphones for streaming](search_query)
-    - find [should I upgrade my GPU](search_query)
-    - search for [interesting space facts](search_query)
-    - google [rasa nlu entity extraction guide](search_query)
-    - search [top movies 2024](search_query)
-    - find [cheap flights to japan](search_query)
-    - look for [latest AI breakthroughs](search_query)
-    - google [how to write a cv](search_query)
-    - search [easy breakfast ideas](search_query)
-    - find [does coffee help focus](search_query)
-    - google [simple flask API example](search_query)
-    - search for [funny programming memes](search_query)
-    - search [how does whisper stt work](search_query)
-    - google [beginner gym routine](search_query)
-    - find [best productivity apps](search_query)
-    - search [why is my mic quiet](search_query)
-    - look up [how to improve english speaking](search_query)
-    - search [difference between ai and machine learning](search_query)
-    - google [what is docker](search_query)
-    - search for [python list comprehension tricks](search_query)
-    - look up [how to increase wifi range](search_query)
-    - google [top movies based on true stories](search_query)
-    - search [how long to boil an egg soft](search_query)
-    - find [what bitcoin actually is](search_query)
-    - google [why my phone keeps restarting](search_query)
-    - search [best budget monitors for coding](search_query)
 
 # ======================================================
 # GET TIME

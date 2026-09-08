@@ -63,7 +63,6 @@ While Sylva is not positioned as a production-ready assistant, it is intentional
 - Python 3.10
 - Local text to speech in linux environment
 - uv as project manager. You can check uv [here](https://pypi.org/project/uv/) (recomended)
-- .env with format `SERPAPI_APIKEY=your_key_here` to execute web search module
 
 #### Run
 ```cmd

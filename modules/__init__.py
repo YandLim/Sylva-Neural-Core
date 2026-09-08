@@ -1,4 +1,4 @@
-from . import affirmation, create_note, get_date, get_time, greetings, open_app, remind_me, self_introduction, shutdown, voice_input, web_search, feature_list, status
+from . import affirmation, create_note, get_date, get_time, greetings, open_app, remind_me, self_introduction, shutdown, voice_input, feature_list, status
 
 __all__ = [
     "affirmation", 
@@ -14,5 +14,4 @@ __all__ = [
     "shutdown", 
     "status",
     "voice_input", 
-    "web_search"
 ]

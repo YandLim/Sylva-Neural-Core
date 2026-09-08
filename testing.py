@@ -71,7 +71,7 @@ def decision_making(
             module_result = greetings.sylva_greet()
             testing_log.info("Greeting module complete. System standing by")
 
-        if intent == "ask_condition":
+        if intent == "status":
             testing_log.info("Initializing status module")
             module_result = status.status_report()
             testing_log.info("Status module complete. System standing by")
@@ -106,21 +106,6 @@ def decision_making(
             module_result = get_date.current_date() 
             testing_log.info("Date module complete. System standing by")
 
-        elif intent == "search_web":
-            testing_log.info("Initializing web search module")
-            module_result, search_result = web_search.search_result(value)
-            
-            # Check if user use tts or not
-            if tts_agent is not False:
-                execute_tts(tts_agent, module_result.sentence, module_result.context)
-                execute_tts(tts_agent, search_result, module_result.context)
-            else:
-                testing_log.info(f"Output: {search_result}")
-
-            testing_log.info("Web search module complete. System standing by")
-            return
-            
-        
         elif intent == "note_create":
             testing_log.info("Initializing note module")
             module_result = create_note.create_note(value)
@@ -181,13 +166,12 @@ def main():
             Sylva's Commands and how to trigger:
             - Greetings(greet)
             - Praise(praise)
-            - Status report(ask_condition)
+            - Status report(status)
             - Intro(self_introduction)
             - Feature list(feature_list)
             - Feature introduction(feature_introduction)
             - Get time(get_time)
             - Get date(get_date)
-            - Search web(search_web)
             - Create note(note_create)
             - Open app(open_app)
             - reminde me(remind_me)
@@ -202,7 +186,7 @@ def main():
             breaked = False
 
             # Comment that need value
-            if command in ["search_web", "note_create", "open_app", "feature_introduction"]:
+            if command in ["note_create", "open_app", "feature_introduction"]:
                 value = input("Enter the value: ")
                 decision_making(command, False, tts_agent=tts_agent if vcoutput.status is True else False, value=value.lower())
 

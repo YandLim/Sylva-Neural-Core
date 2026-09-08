@@ -78,7 +78,7 @@ def decision_making(tts_agent: TTSAgent, nlu_agent: NLUAgent, user_command: str,
             module_result = feature_introduction.exaplain_feature(value)
             system_log.info("Feature introduction module complete. System standing by")
 
-        elif intent == "ask_condition":
+        elif intent == "status":
             system_log.info("Initializing status module")
             module_result = status.status_report()
             system_log.info("Status module complete. System standing by")
@@ -93,19 +93,6 @@ def decision_making(tts_agent: TTSAgent, nlu_agent: NLUAgent, user_command: str,
             module_result = get_date.current_date() 
             system_log.info("Date module complete. System standing by")
 
-        elif intent == "search_web":
-            system_log.info("Initializing web search module")
-            module_result, search_result = web_search.search_result(value)
-
-            execute_tts(tts_agent, module_result.sentence, module_result.context)
-            execute_tts(tts_agent, search_result, module_result.context)
-
-            system_log.debug(f"Search result: {search_result}")
-            user_log.info(f"Search result: {search_result}")
-
-            system_log.info("Web search module complete. System standing by")
-            return
-        
         elif intent == "note_create":
             system_log.info("Initializing note module")
             module_result = create_note.create_note(value)
