@@ -1,7 +1,7 @@
 """Handles intent-to-action routing and ensures controlled execution of Sylva’s modules."""
 
 # Importing modules
-from modules import greetings, get_time, get_date, shutdown, web_search, create_note, open_app, remind_me
+from modules import *
 from utils.function_hint import TTSAgent, NLUAgent
 from utils import logger, play_voice
 from core import intent_processor
@@ -57,6 +57,31 @@ def decision_making(tts_agent: TTSAgent, nlu_agent: NLUAgent, user_command: str,
             system_log.info("Initializing greeting module")
             module_result = greetings.sylva_greet()
             system_log.info("Greeting module complete. System standing by")
+
+        elif intent == "praise":
+            system_log.info("Initializing affirmation module")
+            module_result = affirmation.sylva_affirmation_response()
+            system_log.info("Affirmation module complete. System standing by")
+
+        elif intent == "self_introduction":
+            system_log.info("Initializing introduction module")
+            module_result = self_introduction.sylva_introduction()
+            system_log.info("Introduction module complete. System standing by")
+
+        elif intent == "feature_list":
+            system_log.info("Initializing feature list module")
+            module_result = feature_list.feature_list()
+            system_log.info("Feature list module complete. System standing by")
+
+        elif intent == "feature_introduction":
+            system_log.info("Initializing feature introduction module")
+            module_result = feature_introduction.exaplain_feature(value)
+            system_log.info("Feature introduction module complete. System standing by")
+
+        elif intent == "ask_condition":
+            system_log.info("Initializing status module")
+            module_result = status.status_report()
+            system_log.info("Status module complete. System standing by")
 
         elif intent == "get_time":
             system_log.info("Initializing time module")

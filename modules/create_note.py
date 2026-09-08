@@ -13,7 +13,7 @@ system_log = logger.get_logger(__name__, system=True)
 user_log = logger.get_logger(__name__, system=False)
 
 # Confirmation templates
-note_create_confirm= [
+note_create_confirm = [
     "Noted, Master. Your message has been saved.",
     "Acknowledged. The note has been created successfully.",
     "Done. I have stored the note for you, Sir.",

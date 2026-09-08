@@ -58,6 +58,337 @@ nlu:
     - greeting system
 
 # ======================================================
+# PRAISE
+# ======================================================
+- intent: praise
+  examples: |
+    - good job
+    - nice one
+    - well done
+    - great work
+    - you did well
+    - that was fast
+    - impressive
+    - not bad
+    - good one
+    - you're good
+    - nicely done
+    - perfect
+    - excellent
+    - that's great
+    - brilliant
+    - amazing work
+    - keep it up
+    - you rock
+    - that's fantastic
+    - i love it
+    - really good
+    - super impressive
+    - way to go
+    - kudos to you
+    - you nailed it
+    - that was awesome
+    - great job on that
+    - honestly, that's really good
+    - i appreciate your work
+    - top notch
+    - you're a star
+    - outstanding
+    - flawless execution
+    - couldn't have done it better myself
+    - that's what I'm talking about
+    - phenomenal
+    - you never miss
+    - very well done
+    - good work
+    - fantastic job
+
+# ======================================================
+# SELF INTRODUCTION  
+# ======================================================
+- intent: self_introduction
+  examples: |
+    - who are you
+    - what are you
+    - what is your name
+    - tell me about yourself
+    - introduce yourself
+    - can you tell me who you are
+    - could you introduce yourself
+    - please tell me about yourself
+    - i want to know who you are
+    - i would like to know who you are
+    - what should i call you
+    - who am i speaking to
+    - identify yourself
+    - are you a bot
+    - are you an ai
+    - are you a robot
+    - what are you exactly
+    - so who are you
+    - hey who are you
+    - just tell me who you are
+    - tell me who you are
+    - introduce yourself please
+    - give me your introduction
+    - can i have your name
+    - may i know your name
+    - your name please
+    - what do they call you
+    - who's this
+    - who is this
+    - what is your identity
+    - explain who you are
+    - describe yourself
+    - tell me a bit about yourself
+    - give me some background about you
+    - what kind of bot are you
+    - are you a real person
+    - are you human
+    - who are you exactly
+    - can you say your name
+    - i need your introduction
+    - please introduce who you are
+    - give me your intro
+    - so what's your story
+    - tell me your identity
+    - what are you called
+    - could you tell me your name
+    - would you mind telling me who you are
+    - i'm curious who you are
+    - can you identify yourself
+    - let me know who you are
+    - introduce yourself to me
+    - what should i refer to you as
+    - are you a virtual assistant
+    - what is your purpose
+    - who do i have the pleasure of speaking to
+    - just give me your name
+    - so tell me about you
+    - give me your details
+    - i want to get to know you
+    - who am i chatting with
+
+# ======================================================
+# FEATURE LIST  
+# ======================================================
+- intent: feature_list
+  examples: |
+    - what features do you have
+    - list all your features
+    - tell me all your features
+    - what can you do
+    - show me what you can do
+    - what are your capabilities
+    - give me a list of features
+    - what features are available
+    - list of features please
+    - can you list your features
+    - what are the main features
+    - tell me what you can offer
+    - show me all features
+    - what do you offer
+    - what functions do you have
+    - give me an overview of your features
+    - feature list
+    - all features please
+    - show me everything you can do
+    - what are your key features
+    - what services do you provide
+    - tell me about your features
+    - i want to see all available features
+    - display all features
+    - what are your top features
+    - can you give me a feature overview
+    - what does this app do
+    - what are the features of this system
+    - describe all your features
+    - tell me everything you can do
+    - show me your full feature set
+    - give me a complete list of features
+    - what are your core features
+    - feature summary please
+    - i need a list of all features
+    - what features do you support
+    - list everything you can do
+    - what are your functionalities
+    - give me a breakdown of your features
+    - overview of features please
+    - what are all the things you can do
+    - tell me your main functions
+    - show me a full list of capabilities
+    - i want to know all your features
+    - what options do you have
+    - what is included in your feature set
+    - give me a complete overview
+    - show me your full capabilities
+    - what features are included
+    - tell me the complete feature list
+
+# ======================================================
+# FEATURE INTRODUCTION  
+# ======================================================
+- intent: feature_introduction
+  examples: |
+    - tell me about [create note](feature)
+    - explain the [get date](feature) feature
+    - what is the [get time](feature) module
+    - how does [greetings](feature) work
+    - tell me more about [open app](feature)
+    - describe [remind me](feature) to me
+    - what is [shutdown](feature)
+    - how do i use [voice input](feature)
+    - can you explain [settings](feature)
+    - give me details about [profile](feature)
+    - i want to know about [login](feature)
+    - elaborate on [logout](feature)
+    - tell me the function of [sign up](feature)
+    - what does [password reset](feature) do
+    - explain [notifications](feature) in detail
+    - how does the [calendar](feature) feature work
+    - tell me about [task list](feature)
+    - explain the [file upload](feature) module
+    - what is the [export data](feature) feature
+    - how does [import data](feature) operate
+    - describe the [sync](feature) functionality
+    - tell me more about [cloud storage](feature)
+    - can you describe [sharing](feature)
+    - what about the [permissions](feature) settings
+    - explain [admin panel](feature) to me
+    - give me an overview of [dashboard](feature)
+    - how do i access [analytics](feature)
+    - tell me about the [reports](feature) section
+    - what is the [search](feature) capability
+    - how does [filter](feature) work
+    - explain [dark mode](feature)
+    - tell me about [language preference](feature)
+    - what are the [accessibility](feature) options
+    - describe the [help center](feature)
+    - how do i use the [contact us](feature)
+    - explain the [feedback](feature) form
+    - what is the [chat](feature) feature
+    - how does [video call](feature) function
+    - tell me about [audio call](feature)
+    - describe the [screen sharing](feature) module
+    - what is the [whiteboard](feature) for
+    - explain [tags](feature) and categories
+    - how do i manage [priority](feature) levels
+    - tell me about [due date](feature) tracking
+    - what are [attachments](feature) in this app
+    - how does the [commenting](feature) system work
+    - describe the [history](feature) log
+    - what is [version control](feature)
+    - how do i [archive](feature) old items
+    - explain the [delete](feature) functionality
+    - what about [rename](feature) options
+    - tell me about the [mobile app](feature)
+    - how does the [browser extension](feature) work
+    - describe the [widget](feature) on the home screen
+    - what are the [plugin](feature) capabilities
+    - explain the [slack integration](feature)
+    - how do i set up [teams integration](feature)
+    - what is the [api access](feature) for
+    - tell me about [webhooks](feature)
+    - explain the [single sign on](feature)
+    - how does [multi factor authentication](feature) work
+    - what is the [captcha](feature) on login
+    - describe the [logging](feature) system
+    - tell me about [debug mode](feature)
+    - how do i switch to [production mode](feature)
+    - explain the [environment setup](feature)
+    - what is the [docker](feature) configuration
+    - tell me about [collaboration](feature)
+    - what is the [role management](feature)
+    - explain [user groups](feature)
+    - how does [bulk edit](feature) work
+    - describe the [template](feature) library
+    - what is the [automation](feature) engine
+    - tell me about [scheduled tasks](feature)
+    - explain [background jobs](feature)
+    - how do i use the [rich text editor](feature)
+    - what are the [emoji support](feature) options
+    - tell me about [shortcuts](feature)
+    - describe the [offline mode](feature)
+    - how does [data compression](feature) work
+    - explain the [encryption](feature) standards
+    - tell me about [qr code](feature) scanning
+    - what is the [barcode](feature) reader
+    - how do i use the [ocr](feature) tool
+    - explain the [translation](feature) tool
+    - what is the [text to speech](feature) option
+    - tell me more about [speech to text](feature)
+    - can you walk me through [create note](feature)
+    - please define [get date](feature) clearly
+    - i need clarification on [get time](feature)
+    - how exactly does [greetings](feature) trigger
+    - show me the [open app](feature) function
+    - clarify the [remind me](feature) setting
+    - walk me through [shutdown](feature) process
+    - how does [voice input](feature) compare to typing
+    - please explain [view notes](feature) feature
+    - explain the [edit note](feature) capabilities
+    - tell me about the [delete note](feature) confirmation
+    - what does the [email report](feature) include
+    - explain how the [csv export](feature) works
+    - tell me about the [custom fields](feature) option
+
+# ======================================================
+# ASK_CONDITION
+# ======================================================
+- intent: ask_condition
+  examples: |
+    - how are you
+    - how are you doing
+    - how are you today
+    - are you good
+    - are you okay
+    - are you alright
+    - are you doing well
+    - are you feeling good
+    - how do you do
+    - how's everything
+    - how's it going with you
+    - how have you been
+    - how's your day
+    - how's your day going
+    - how are things with you
+    - what's up with you
+    - how are you feeling
+    - are you feeling okay
+    - are you feeling fine
+    - do you feel great
+    - are you happy
+    - what's your mood
+    - are you doing okay
+    - is everything okay with you
+    - is everything alright
+    - everything good with you
+    - everything clear
+    - is everything clear
+    - is it clear to you
+    - do you understand
+    - do you get it
+    - are you with me
+    - are you following me
+    - do you follow
+    - are you listening
+    - can you hear me
+    - are you still there
+    - are you ready
+    - are you prepared
+    - are you functioning well
+    - is your system working
+    - are you operational
+    - are you up and running
+    - how are you holding up
+    - are you coping well
+    - do you feel alright
+    - are you doing great
+    - how's life treating you
+    - are you feeling yourself today
+    - is everything running smoothly on your end
+
+# ======================================================
 # OPEN APP
 # ======================================================
 - intent: open_app
@@ -184,7 +515,6 @@ nlu:
     - save this [build finished in 9 minutes](note_text)
     - write [room 7 needs cleaning](note_text)
     - note [class starts at 10 but no reminder needed](note_text)
-
 
 # ======================================================
 # SEARCH WEB

@@ -1,5 +1,5 @@
 # Importing modules and libraries
-from modules import greetings, remind_me, voice_input
+from modules import *
 from utils import logger, tts_generator
 from core import stt, sylva_decision
 from rasa.core.agent import Agent 

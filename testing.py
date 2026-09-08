@@ -3,7 +3,7 @@ for testing modules and function logic without using
 TTS or STT."""
 
 # Importing modules
-from modules import greetings, get_time, get_date, shutdown, web_search, create_note, open_app, remind_me, voice_input
+from modules import *
 from utils import logger, play_voice, tts_generator
 from utils.function_hint import TTSAgent
 from typing import Optional
@@ -70,6 +70,31 @@ def decision_making(
             testing_log.info("Initializing greeting module")
             module_result = greetings.sylva_greet()
             testing_log.info("Greeting module complete. System standing by")
+
+        if intent == "ask_condition":
+            testing_log.info("Initializing status module")
+            module_result = status.status_report()
+            testing_log.info("Status module complete. System standing by")
+
+        elif intent == "praise":
+            testing_log.info("Initializing affirmation module")
+            module_result = affirmation.sylva_affirmation_response()
+            testing_log.info("Affirmation module complete. System standing by")
+
+        elif intent == "self_introduction":
+            testing_log.info("Initializing introduction module")
+            module_result = self_introduction.sylva_introduction()
+            testing_log.info("Introduction module complete. System standing by")
+
+        elif intent == "feature_list":
+            testing_log.info("Initializing feature list module")
+            module_result = feature_list.feature_list()
+            testing_log.info("Feature list module complete. System standing by")
+
+        elif intent == "feature_introduction":
+            testing_log.info("Initializing feature introduction module")
+            module_result = feature_introduction.exaplain_feature(value)
+            testing_log.info("Feature introduction module complete. System standing by")
 
         elif intent == "get_time":
             testing_log.info("Initializing time module")
@@ -155,6 +180,11 @@ def main():
         print("""
             Sylva's Commands and how to trigger:
             - Greetings(greet)
+            - Praise(praise)
+            - Status report(ask_condition)
+            - Intro(self_introduction)
+            - Feature list(feature_list)
+            - Feature introduction(feature_introduction)
             - Get time(get_time)
             - Get date(get_date)
             - Search web(search_web)
@@ -171,14 +201,10 @@ def main():
             found = True
             breaked = False
 
-            # Basic command without value needed
-            if command == "greet" or command == "get_time" or command == "get_date":
-                decision_making(command, False, tts_agent=tts_agent if vcoutput.status is True else False)
-            
             # Comment that need value
-            elif command == "search_web" or command == "note_create" or command == "open_app":
+            if command in ["search_web", "note_create", "open_app", "feature_introduction"]:
                 value = input("Enter the value: ")
-                decision_making(command, False, tts_agent=tts_agent if vcoutput.status is True else False, value=value)
+                decision_making(command, False, tts_agent=tts_agent if vcoutput.status is True else False, value=value.lower())
 
             elif command == "remind_me":
                 value = input("What time and what is the reminder context: ")
@@ -199,8 +225,12 @@ def main():
                 breaked = True
                 return
             
+            # Basic command without value needed
             else:
-                found = False
+                try:
+                    decision_making(command, False, tts_agent=tts_agent if vcoutput.status is True else False)
+                except:
+                    found = False
         
         # If no command is found
         if found is False:
