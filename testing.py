@@ -96,6 +96,11 @@ def decision_making(
             module_result = feature_introduction.exaplain_feature(value)
             testing_log.info("Feature introduction module complete. System standing by")
 
+        elif intent == "iot_control":
+            testing_log.info("Initializing IOT control module")
+            module_result = light_control.turn_light(value[0], value[1])
+            testing_log.info("IOT control module complete. System standing by")
+
         elif intent == "get_time":
             testing_log.info("Initializing time module")
             module_result = get_time.current_time()
@@ -173,8 +178,9 @@ def main():
             - Get time(get_time)
             - Get date(get_date)
             - Create note(note_create)
+            - IOT control(iot_control)
             - Open app(open_app)
-            - reminde me(remind_me)
+            - remind me(remind_me)
             - shutdown(shutdown_system)
             - break"""
         )
@@ -186,13 +192,18 @@ def main():
             breaked = False
 
             # Comment that need value
-            if command in ["note_create", "open_app", "feature_introduction"]:
+            if command in ["note_create", "open_app", "feature_introduction",]:
                 value = input("Enter the value: ")
                 decision_making(command, False, tts_agent=tts_agent if vcoutput.status is True else False, value=value.lower())
 
             elif command == "remind_me":
-                value = input("What time and what is the reminder context: ")
+                value = input("What time and what is the reminder context: ").lower()
                 decision_making(command, False, tts_agent=tts_agent if vcoutput.status is True else False, user_command=value)
+
+            elif command == "iot_control":
+                device_value = input("Device name: ").lower()
+                state_value = input("State: ").lower()
+                decision_making(command, False, tts_agent=tts_agent if vcoutput.status is True else False, value=(device_value, state_value))
 
             # Shutdown command
             elif command == "shutdown_system":

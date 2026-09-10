@@ -101,6 +101,9 @@ nlu:
     - very well done
     - good work
     - fantastic job
+    - thanks
+    - thank you 
+    - cool
 
 # ======================================================
 # SELF INTRODUCTION  
@@ -443,6 +446,167 @@ nlu:
     - launch [powerpoint](app_name)
     - fire up [premiere](app_name)
     - open [after effects](app_name)
+
+# ======================================================
+# IOT CONTROL
+# ======================================================
+- intent: iot_control
+  examples: |
+    # --- Single Device Commands ---
+    - turn on the [lamp](device)
+    - turn off the [lamp](device)
+    - switch on the [tv](device)
+    - switch off the [tv](device)
+    - turn on [lights](device)
+    - turn off [lights](device)
+    - power on the [ac](device)
+    - power off the [ac](device)
+    - please turn on the [fan](device)
+    - please turn off the [fan](device)
+    - can you switch on the [heater](device)
+    - can you switch off the [heater](device)
+    - turn the [speaker](device) on
+    - turn the [speaker](device) off
+    - switch the [projector](device) on
+    - switch the [projector](device) off
+    - activate the [smart bulb](device)
+    - deactivate the [smart bulb](device)
+    - turn on the [garage door](device)
+    - close the [garage door](device)
+    - open the [curtains](device)
+    - close the [curtains](device)
+    - power up the [robot vacuum](device)
+    - power down the [robot vacuum](device)
+    - i want to turn on the [coffee maker](device)
+    - i want to turn off the [coffee maker](device)
+    - please switch the [thermostat](device) on
+    - please switch the [thermostat](device) off
+    - could you turn on the [bedroom lamp](device)
+    - could you turn off the [bedroom lamp](device)
+    - start the [air purifier](device)
+    - stop the [air purifier](device)
+    - turn the [water heater](device) on
+    - turn the [water heater](device) off
+    - switch off all [lights](device)
+    - switch on the [kitchen lights](device)
+    - turn on the [living room tv](device)
+    - turn off the [bedroom tv](device)
+    - activate the [night light](device)
+    - deactivate the [night light](device)
+    - turn on the [air conditioner](device)
+    - turn off the [air conditioner](device)
+    - can you please turn on the [gaming console](device)
+    - can you please turn off the [gaming console](device)
+    - switch the [desk lamp](device) on
+    - switch the [desk lamp](device) off
+    - please power on the [monitor](device)
+    - please power off the [monitor](device)
+    - turn on the [porch light](device)
+    - turn off the [porch light](device)
+
+    # --- Theme / Scene / Mode Commands ---
+    - activate [movie mode](device)
+    - enable [cinema mode](device)
+    - turn on [party mode](device)
+    - set [bedtime mode](device)
+    - activate [morning routine](device)
+    - start [work mode](device)
+    - enable [focus mode](device)
+    - turn on [relax mode](device)
+    - set [night mode](device)
+    - activate [romantic scene](device)
+    - enable [dinner scene](device)
+    - turn on [reading scene](device)
+    - start [study mode](device)
+    - enable [sleep mode](device)
+    - activate [wake up scene](device)
+    - turn on [goodbye mode](device)
+    - set [vacation mode](device)
+    - enable [eco mode](device)
+    - activate [boost mode](device)
+    - turn on [cozy theme](device)
+    - apply [dark theme](device)
+    - enable [light theme](device)
+    - activate [festive mode](device)
+    - turn on [game mode](device)
+    - set [sports mode](device)
+    - i want to activate [movie night](device)
+    - please enable [conference mode](device)
+    - start the [bedtime routine](device)
+    - turn on [entertainment mode](device)
+    - set the [energy saving mode](device)
+    - activate [chill out scene](device)
+    - enable [pandemic mode](device) for the office
+    - switch to [movie mode](device)
+    - change to [party theme](device)
+    - apply the [morning scene](device)
+    - load the [gaming preset](device)
+    - run the [evening routine](device)
+    - turn on [do not disturb mode](device)
+    - set the [ambient scene](device)
+    - activate [sunset mode](device)
+    - enable [awake mode](device)
+    - start [meditation scene](device)
+    - turn on [cooking mode](device) in the kitchen
+    - set the [home theater mode](device)
+    - activate the [meeting scene](device)
+    - enable [holiday theme](device)
+    - turn on [sleepy time mode](device)
+    - activate [cleaning mode](device)
+    - set [remote work mode](device)
+    - enable [outdoor scene](device)
+
+    # --- Alternative Structures ---
+    - turn the [lamp](device) on
+    - turn the [lamp](device) off
+    - switch the [tv](device) on
+    - switch the [tv](device) off
+    - turn the [speaker](device) on please
+    - turn the [speaker](device) off please
+    - the [lights](device) turn on
+    - the [lights](device) turn off
+    - [ac](device) on
+    - [ac](device) off
+    - [fan](device) switch on
+    - [fan](device) switch off
+    - can you turn the [heater](device) on
+    - can you turn the [heater](device) off
+    - could you switch the [projector](device) on
+    - could you switch the [projector](device) off
+    - the [garage door](device) open
+    - the [garage door](device) close
+    - [curtains](device) open
+    - [curtains](device) close
+    - let's turn the [coffee maker](device) on
+    - let's turn the [coffee maker](device) off
+    - would you turn the [bedroom lamp](device) on
+    - would you switch the [bedroom lamp](device) off
+    - can we have the [living room lights](device) on
+    - can we have the [kitchen lights](device) off
+    - the [air purifier](device) start
+    - the [air purifier](device) stop
+    - mind switching the [desk lamp](device) on
+    - mind turning the [desk lamp](device) off
+    - turn the [water heater](device) on now
+    - turn the [monitor](device) off now
+    - i need the [porch light](device) on
+    - i need the [porch light](device) off
+    - [night light](device) activate
+    - [night light](device) deactivate
+    - let's get the [air conditioner](device) running
+    - let's stop the [air conditioner](device)
+    - the [fan](device) should be on
+    - the [tv](device) should be off
+    - go ahead and turn the [speaker](device) on
+    - go ahead and turn the [speaker](device) off
+    - i want the [heater](device) turned on
+    - i want the [heater](device) turned off
+    - turn the [curtains](device) open
+    - turn the [curtains](device) closed
+    - is it possible to turn the [projector](device) on
+    - is it possible to turn the [projector](device) off
+    - can you get the [smart bulb](device) on
+    - can you get the [smart bulb](device) off
 
 # ======================================================
 # NOTE CREATE
@@ -842,3 +1006,75 @@ nlu:
     - decline
     - do not proceed
     - please cancel this
+
+# ======================================================
+# TURN ON
+# ======================================================
+- intent: turn_on
+  examples: |
+    - turn on
+    - switch on
+    - power on
+    - start
+    - activate
+    - enable
+    - run
+    - launch
+    - boot
+    - fire up
+    - bring to life
+    - wake up
+    - arise
+    - come alive
+    - turn it on
+    - switch it on
+    - power it up
+    - start it up
+    - kickstart
+    - initiate
+    - begin operation
+    - turn on now
+    - just start it
+    - i need it on
+    - set it to on
+    - make it active
+    - wake it up please
+    - turn on everything
+    - start the system
+    - bring it online
+
+# ======================================================
+# TURN OFF
+# ======================================================
+- intent: turn_off
+  examples: |
+    - turn off
+    - switch off
+    - power off
+    - shut down
+    - shut
+    - stop
+    - deactivate
+    - disable
+    - kill
+    - end
+    - close
+    - terminate
+    - put to sleep
+    - turn it off
+    - shut it down
+    - power it down
+    - switch it off
+    - kill it
+    - close it down
+    - end process
+    - shut everything
+    - deactivate now
+    - stop it please
+    - turn off everything
+    - just shut it
+    - i need it off
+    - bring it down
+    - disable the system
+    - put it to sleep
+    - shut down completely

@@ -3,21 +3,14 @@
 # Importing modules
 from modules import *
 from utils.function_hint import TTSAgent, NLUAgent
-from utils import logger, play_voice
+from utils.play_tts import execute_tts
+from utils import logger
 from core import intent_processor
 import asyncio
 
 # Define system logger
 system_log = logger.get_logger(__name__, system=True)
 user_log = logger.get_logger(__name__, system=False)
-
-# Execute text to speech function
-def execute_tts(tts_agent: TTSAgent, sentence: str, wav_ctx: str) -> None:
-    system_log.info("Executing text to speech function")
-    wav_path = tts_agent.sylva_voice(sentence, f"{wav_ctx}.wav")
-    play_voice.play_sound(wav_path)
-    user_log.info(f"Sylva: {sentence}")
-    return
 
 # Sylva decision making functionality
 def decision_making(tts_agent: TTSAgent, nlu_agent: NLUAgent, user_command: str, shutdown_pending: bool) -> None:
@@ -93,6 +86,11 @@ def decision_making(tts_agent: TTSAgent, nlu_agent: NLUAgent, user_command: str,
             module_result = get_date.current_date() 
             system_log.info("Date module complete. System standing by")
 
+        elif intent == "iot_control":
+            system_log.info("Initializing IOT control module")
+            module_result = light_control.turn_light(value, user_command, tts_agent, nlu_agent)
+            system_log.info("IOT control module complete. System standing by")            
+
         elif intent == "note_create":
             system_log.info("Initializing note module")
             module_result = create_note.create_note(value)
@@ -123,5 +121,5 @@ def decision_making(tts_agent: TTSAgent, nlu_agent: NLUAgent, user_command: str,
         
     except Exception as e:
         system_log.error(f"Something went wrong while running module: {e}")
-        raise
+        return
     

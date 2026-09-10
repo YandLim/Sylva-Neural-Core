@@ -1,12 +1,14 @@
 # Importing modules and libraries
-from modules import *
 from utils import logger, tts_generator
 from core import stt, sylva_decision
 from rasa.core.agent import Agent 
-from config import ex_config
+from config import ex_config, shared_var
 from threading import Thread
+from modules import *
+import keyboard
 import random
 import time
+import sys
 
 # Define logger
 system_log = logger.get_logger(__name__, system=True)
@@ -19,6 +21,7 @@ nlu_model_path = ex_config.NLU_MODEL_PATH
 auto_sleep = 30
 sylva_active = False
 shutdown_pending = False
+manual_interrupt = False
 last_wake_time = 0
 run_time = 0
 
@@ -90,6 +93,7 @@ if __name__ == "__main__":
                 system_log.warning("User decision is not recognized")
                 continue
             sylva_decision.execute_tts(tts_agent, vcinput.sentence, wav_ctx=vcinput.context)
+            shared_var.vcinput = vcinput.status
             break
 
         # Looping until user deactivate Sylva
@@ -101,14 +105,22 @@ if __name__ == "__main__":
             else:
                 user_command = input("Master, Your Command: ")
 
+            # Manual interrupt
+            if keyboard.is_pressed("ctrl+shift+q"):
+                manual_interrupt = True
+                user_command = "sylva"
+
             # Checking command availability
             now = time.time()
             if user_command is not None:
                 user_log.info(f"USER: {user_command}")
 
                 # Check wake word in sleep mode
-                if not sylva_active:
+                if not sylva_active or manual_interrupt is True:
                     if any(w in user_command.lower() for w in wake_word):
+                        # Reset manual interrupt
+                        manual_interrupt = False
+
                         # Activated Sylva
                         sylva_active = True 
                         last_wake_time = time.time()
@@ -163,3 +175,5 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         system_log.error(f"Keyboard interupting has detected. Turn of the system\n\n")
+        sys.exit(0)
+

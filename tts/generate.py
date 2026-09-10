@@ -4,7 +4,6 @@
 from TTS.api import TTS
 import json
 import sys
-import os
 
 # Load model
 model = sys.argv[1]

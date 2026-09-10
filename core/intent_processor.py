@@ -12,6 +12,10 @@ system_log = logger.get_logger(__name__, system=True)
 # Running the model
 async def running_model(agent, user_input: str) -> str:
     try:
+        if not user_input.strip():
+            system_log.warning("Empty input")
+            return None, None
+        
         # Getting result from model
         result = await agent.parse_message(user_input)
 

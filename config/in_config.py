@@ -11,3 +11,4 @@ REMIND_ME_DIR = attachment_dir + r"\reminders"
 
 APPLICATION_PATH = attachment_dir + r"\application_path.json"
 USER_WAV = attachment_dir + r"\user_wav.wav"
+IOT_DEVICE_PATH =  r"config\iot_device.json"

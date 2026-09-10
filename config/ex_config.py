@@ -10,3 +10,9 @@ TTS_MODEL_NAME = "p294"
 TTS_MODEL_PATH = "tts_models/en/vctk/vits"
 STT_MODEL = "small.en"
 SERPAPI_APIKEY = os.getenv("SERPAPI_APIKEY")
+
+# Tuya API 
+tuya_api = os.getenv("TUYAAPI")
+tuya_secret = os.getenv("TUYASECRET")
+tuya_region = os.getenv("TUYAREGION")
+tuya_device_id = os.getenv("TUYADEVICEID")

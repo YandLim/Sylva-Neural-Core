@@ -21,4 +21,4 @@ tts/Output
 rasa_nlu/rasa_venv
 
 Wake_Sylva.bat
-rasa_nlu/models/
+rasa_nlu/models/sylva_neural.tar.gz
