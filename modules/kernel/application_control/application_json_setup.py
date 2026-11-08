@@ -1,15 +1,39 @@
-"""Stand alone script use for setup and clean the apps_raw into application_path.json"""
+"""Script use for setup and clean the raw apps path into application_path.json"""
 
 # Importing modules
+from config import in_config
+from utils import logger
 from pathlib import Path
+import subprocess
 import json
-import os
 
-# Path and variables
-parent_path = os.getcwd()
-raw_path = Path(parent_path + r"\attachment\apps_raw.json")
-final_output = Path(parent_path + r"\attachment\application_path.json")
+log = logger.get_logger(__name__, True)
+
+final_output = Path(in_config.APPLICATION_PATH)
 new_json = {}
+
+def get_start_apps() -> list[dict]:
+    # -NoProfile biar cepat & gak kena profil user
+    # -Command di-quote, pipe ke ConvertTo-Json -Compress biar 1 baris
+    ps = [
+        "powershell", "-NoProfile", "-NonInteractive", "-Command",
+        "Get-StartApps | Select-Object Name, AppID | ConvertTo-Json -Compress"
+    ]
+
+    result = subprocess.run(
+        ps,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",      # penting: paksa UTF-8
+        check=True,
+    )
+
+    data = json.loads(result.stdout)
+    # Kalau cuma 1 app, ConvertTo-Json keluarin object, bukan array
+    if isinstance(data, dict):
+        data = [data]
+    return data
+
 
 # Cleaning json data
 def clean_json_data(application: list) -> dict:
@@ -115,20 +139,19 @@ def add_aliasess(data: dict) -> dict:
 
 
 # Main script runner
-if __name__ == "__main__":
-    # Opening raw_application.json
+def registry_sync():
+    log.info("Syncing application")
     try:
-        with raw_path.open(encoding="utf-8-sig") as f:
-            apps = json.load(f)
-    except:
-        with raw_path.open(encoding="utf-16") as f:
-            apps = json.load(f)
+        apps = get_start_apps()
 
-    # Proccessing the json file
-    app_path = clean_json_data(apps)
-    cleaned_json = remove_unwanted_application(app_path)
-    final_json = add_aliasess(cleaned_json)
+        # Proccessing the json file
+        app_path = clean_json_data(apps)
+        cleaned_json = remove_unwanted_application(app_path)
+        final_json = add_aliasess(cleaned_json)
 
-    # Saving final json file
-    with final_output.open("w", encoding="utf-16") as f:
-        json.dump(final_json, f, indent=2, ensure_ascii=False)
+        # Saving final json file
+        with final_output.open("w", encoding="utf-16") as f:
+            json.dump(final_json, f, indent=2, ensure_ascii=False)
+
+    except Exception as e:
+        log.error(f"Something went wrong while syncing application: {e}")

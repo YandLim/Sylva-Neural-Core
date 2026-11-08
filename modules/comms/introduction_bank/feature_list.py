@@ -1,8 +1,9 @@
 """Handles question about feature but in general from question like: 'What can you do?'."""
 
 # Importing modules and libraries
+from modules.comms.introduction_bank import feature_desc
 from utils.dataclasess import ModuleResults
-from utils import logger, feature_desc
+from utils import logger
 import random
 
 # Getting class and function

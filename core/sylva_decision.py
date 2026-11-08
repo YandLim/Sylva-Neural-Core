@@ -98,7 +98,7 @@ def decision_making(tts_agent: TTSAgent, nlu_agent: NLUAgent, user_command: str,
         
         elif intent == "open_app":
             system_log.info("Opening application")
-            module_result = open_app.run_module(value)
+            module_result = open_app.run_module(value, tts_agent)
             system_log.info("Open app module complete. Sylva standing by")
         
         elif intent == "remind_me":

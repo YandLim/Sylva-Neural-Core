@@ -98,7 +98,7 @@ def decision_making(
 
         elif intent == "iot_control":
             testing_log.info("Initializing IOT control module")
-            module_result = light_control.turn_light(value[0], value[1])
+            module_result = light_control.turn_light(value[0], value[1], tts_agent)
             testing_log.info("IOT control module complete. System standing by")
 
         elif intent == "get_time":

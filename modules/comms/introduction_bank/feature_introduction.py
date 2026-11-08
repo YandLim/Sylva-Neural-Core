@@ -2,7 +2,8 @@
 
 # Importing modules and libraries
 from utils.dataclasess import ModuleResults
-from utils import logger, feature_desc
+from utils import logger
+from . import feature_desc
 import random
 
 # Getting class and function

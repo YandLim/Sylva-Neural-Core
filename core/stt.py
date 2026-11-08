@@ -35,7 +35,7 @@ def speech_recognition() -> str:
         while True:
             try:
                 # Activate microphone access
-                audio = recognizer.listen(source, timeout=0.3, phrase_time_limit=4) # Listening
+                audio = recognizer.listen(source, timeout=0.4, phrase_time_limit=3) # Listening
                 rms = audioop.rms(audio.frame_data, 2) # Audio level
                 system_log.debug(f"User rms: {rms}") # Print audio level
 
@@ -47,9 +47,11 @@ def speech_recognition() -> str:
                 user_wav = audio.get_wav_data()
                 system_log.info("Processing voice")
                 with open(user_wav_path, "wb") as f:
+                    system_log.info("Writing command into wav file")
                     f.write(user_wav)
 
                 # Whisper STT
+                system_log.info("Transcribing voice")
                 result = stt_model.transcribe(
                     user_wav_path,
                     language="en",
@@ -57,8 +59,10 @@ def speech_recognition() -> str:
                     fp16=False,
                     temperature=0.2
                 )
-
+                
+                system_log.info("Successfully transcribing")
                 if result.get("no_speech_prob", 0) > 0.90:
+                    system_log.info("Returning None as command")
                     return None
 
                 # Return the extracted text
@@ -71,11 +75,11 @@ def speech_recognition() -> str:
                     # Handle invalid error word for Sylva
                     for aliases in SYLVA_ALIASES:
                         if aliases in text:
-                            text = text.replace(aliases, "Sylva")
+                            text = text.replace(aliases, "sylva")
 
-                    system_log.debug(f"stt proccess return: {text}")
                     return(text)
                 else:
+                    system_log.info("Returning None as command")
                     return None
 
             # Return None if timeout occured

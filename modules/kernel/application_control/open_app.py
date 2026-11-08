@@ -3,8 +3,10 @@
 # Importing modules 
 from utils.dataclasess import ModuleResults
 from config import in_config
-from utils import logger
+from utils import logger, function_hint
 from pathlib import Path
+from utils.play_tts import execute_tts
+from . import application_json_setup
 import subprocess
 import ctypes
 import random
@@ -16,6 +18,10 @@ import os
 log = logger.get_logger(__name__, system=True)
 user_log = logger.get_logger(__name__, system=False)
 json_path = Path(in_config.APPLICATION_PATH)
+
+Path(json_path).parent.mkdir(parents=True, exist_ok=True)
+if not json_path.exists():
+    json_path.write_text("{}") 
 
 # Sylva templates
 sylva_template = {
@@ -31,7 +37,29 @@ sylva_template = {
         "{app_name} launch verified. No anomalies detected.",
         "Process complete. {app_name} is now under your control."
     ],
-    "failed":[
+    "retrying": [
+        "I couldn't locate {app}. Attempting a registry sync to find it.",
+        "{app} isn't in my index yet. Running a sync before trying again.",
+        "No entry for {app}. Scanning the system to update my records.",
+        "{app} wasn't found. I'll sync the registry and retry.",
+        "That path failed, Sir. Let me sync and locate {app} properly.",
+        "{app} is unregistered. Initiating a scan before another attempt.",
+        "Couldn't resolve {app}, Master. Syncing the index now.",
+        "{app} isn't recognized. Give me a moment to rescan and register it.",
+        "Execution failed for {app}. Refreshing my registry first.",
+        "{app} is missing from my records. Running a sync to fix that.",
+        "No match for {app}, Sir. I'll update the registry and try again.",
+        "{app} slipped past my index. Rescanning before retrying.",
+        "That didn't work, Master. Syncing my records to find {app}.",
+        "{app} isn't logged anywhere I know. Scanning now.",
+        "I can't confirm {app} exists yet. Running a registry check.",
+        "{app} wasn't where I expected, Sir. Syncing before another pass.",
+        "Unregistered target: {app}. Attempting to sync and locate it.",
+        "{app} isn't on file, Master. Let me scan and update before retrying.",
+        "Failed to launch {app}. Cross-checking with a fresh sync.",
+        "{app} came up empty, Sir. Refreshing the registry before I try once more."
+    ],
+    "failed": [
         "I couldn’t locate {app}. The system reports no valid entry.",
         "{app} is not registered in my application index.",
         "Search completed. {app} was not found on this system.",
@@ -49,8 +77,12 @@ sylva_template = {
 # Collecting json_data 
 def get_json_data(json_path: Path) -> dict:
     application_data = {}
-    with json_path.open(encoding="utf-16") as f:
-        data = json.load(f)
+    try:
+        with json_path.open(encoding="utf-8-sig") as f:
+            data = json.load(f)
+    except:
+        with json_path.open(encoding="utf-16") as f:
+            data = json.load(f)
 
     # Cleaning json data 
     for item in data.values():
@@ -148,21 +180,38 @@ def open_app(user_input: str) -> True | False:
 
 
 # Sylva run the module
-def run_module(application_name: str) -> ModuleResults:
-    openning_app = open_app(application_name)
-    
-    # If app is found and not found
-    if openning_app is True:
-        phrase = random.choice(sylva_template["success"])
-        sentence = phrase.format(app_name=application_name)
-        context = "running_app_success"
+def run_module(application_name: str, tts_agent: function_hint.TTSAgent) -> ModuleResults:
+    try:
+        openning_app = open_app(application_name)
+        
+        # If app is found and not found
+        if openning_app is True:
+            phrase = random.choice(sylva_template["success"])
+            sentence = phrase.format(app_name=application_name)
+            context = "running_app_success"
 
-    else:
-        phrase = random.choice(sylva_template["failed"])
-        sentence = phrase.format(app=application_name)
-        context = "running_app_failed"
-    
-    return ModuleResults(sentence=sentence, context=context)
+        else:
+            retry_phrase = random.choice(sylva_template["retrying"])
+            retry_sentence = retry_phrase.format(app=application_name)
+            context = "retrying_running_app"
+            execute_tts(tts_agent, retry_sentence, context)
+
+            application_json_setup.registry_sync()
+            openning_app = open_app(application_name)
+
+            if openning_app is True:
+                phrase = random.choice(sylva_template["success"])
+                sentence = phrase.format(app_name=application_name)
+                context = "running_app_success"
+
+            else:
+                phrase = random.choice(sylva_template["failed"])
+                sentence = phrase.format(app=application_name)
+                context = "running_app_failed"
+                
+        return ModuleResults(sentence=sentence, context=context)
+    except Exception as e:
+        log.error(f"Something went wrong while trying to open application: {application_name}, {e}")
 
 if __name__ == "__main__":
     run_module(None)

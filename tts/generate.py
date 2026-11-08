@@ -31,11 +31,11 @@ while True:
                 speaker=speaker, 
                 language=language, 
                 file_path=outfile, 
-                temperature=0.3, 
+                temperature=0.5, 
                 top_k=40, 
                 top_p=0.75, 
-                enable_text_splitting=True, 
-                speed=0.28
+                enable_text_splitting=False, 
+                speed=1.0
             )
             
         else:
@@ -46,7 +46,7 @@ while True:
                 temperature=0.8, 
                 top_k=100, 
                 top_p=0.9, 
-                enable_text_splitting=True, 
+                enable_text_splitting=False, 
             )
         
         print(json.dumps({"file": outfile}), flush=True)

@@ -1,8 +1,8 @@
 {
-    "lamp": {
-        "device_id": "a33ed116847d86c8e96ooa",
-        "ip_address": "192.168.0.152",
-        "local_key": "GbA'(:PHmEwdLcuW",
-        "version": 3.5
-    }
+  "lamp": {
+    "device_id": "a33ed116847d86c8e96ooa",
+    "ip_address": "192.168.1.2",
+    "local_key": ">(St+=Kt#cNKe|n3",
+    "version": "3.5"
+  }
 }

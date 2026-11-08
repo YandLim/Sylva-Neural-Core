@@ -168,7 +168,7 @@ if __name__ == "__main__":
                     break
 
             # Update last wake time and do commands
-            shutdown_pending = sylva_decision.decision_making(tts_agent, nlu_agent, user_command, shutdown_pending)
+            shutdown_pending = sylva_decision.decision_making(tts_agent, nlu_agent, user_command.lower(), shutdown_pending)
             last_wake_time = time.time()
     except Exception as e:
         system_log.error(f"Something went wrong while running the program: {e}\n\n")
